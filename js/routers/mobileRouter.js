@@ -48,17 +48,17 @@ define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView", "../
                         if (data.success) {
                             that.launchApp();
                         } else {
-                            that.env("login");
+                            that.env("hopemobile");
                         }
                         return false;
                     },
                     error: function(xhr, type){
-                        that.env("login");
+                        that.env("hopemobile");
                     }
 
                 });
             } else {
-                this.env("login");
+                this.env("hopemobile");
             }
         },
 
