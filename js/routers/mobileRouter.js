@@ -63,14 +63,13 @@ define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView", "../
         },
 
         launchApp: function() {
-            alert("launch app");
             this.schemaList = new SchemaCollection();
             
             var that = this;
             var user = window.localStorage.getItem("user");
             var token = window.localStorage.getItem("auth_token");
 
-            this.schemaList.fetch({
+            this.schemaList.sync({
                 data: {
                     user: user,
                     token: token
