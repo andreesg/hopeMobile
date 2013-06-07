@@ -1,7 +1,8 @@
+
 // Schema Model
 // ==============
 
-define([ "jquery", "backbone" ], function( $, Backbone ) {
+define(["jquery", "backbone"], function($, Backbone) {
 	var Model = Backbone.Model.extend({
 		urlRoot: rootUrl + "mobile/schemas/",
 		initialize:function(){
@@ -12,4 +13,4 @@ define([ "jquery", "backbone" ], function( $, Backbone ) {
 		}
 	});
 	return Model;
-}
+});
