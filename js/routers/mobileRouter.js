@@ -69,14 +69,18 @@ define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView", "../
             var user = window.localStorage.getItem("user");
             var token = window.localStorage.getItem("auth_token");
 
-            alert("try to fetch");
             this.schemaList.fetch({
                 data: {
                     user: user,
                     token: token
                 },
                 success: function(collection, response) {
-                    alert("Fetch success!");
+                    //alert("Fetch success!");
+                    var categories = "";
+                    for (m in that.schemaList.models) {
+                         categories += "<li><a href='#'>"+that.schemaList.models[m].get('name')+"</a></li>";
+                    } 
+                    $("#listcategories").append(categories);
                 },
                 error: function(collection, response){
                     alert(JSON.stringify(response));
