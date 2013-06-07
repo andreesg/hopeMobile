@@ -69,7 +69,7 @@ define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView", "../
             var user = window.localStorage.getItem("user");
             var token = window.localStorage.getItem("auth_token");
 
-            this.schemaList.sync({
+            this.schemaList.fetch({
                 data: {
                     user: user,
                     token: token
