@@ -69,6 +69,7 @@ define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView", "../
             var user = window.localStorage.getItem("user");
             var token = window.localStorage.getItem("auth_token");
 
+            alert("try to fetch");
             this.schemaList.fetch({
                 data: {
                     user: user,
