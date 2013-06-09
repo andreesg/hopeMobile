@@ -5,7 +5,7 @@
       <title>Hope</title>
       <meta name="description" content="">
 
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 
       <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
 </head>
@@ -22,7 +22,6 @@
             <ul data-role="listview" data-inset="true">
                   <li><a href="#hope?login" class="login">Login</a></li>
                   <li><a href="#hope?about" class="about">About</a></li>
-                  <li><a href="#hope?home" class="about">Test</a></li>
             </ul>
       </div><!-- /content -->
 
@@ -48,11 +47,7 @@
 
 
 </body>
-<script type="text/javascript">
-    domain = "http://moth.dec.uc.pt/"
-    rootUrl= domain + "smartroads/"
-    var app = null;
-</script>
+
 <script type="text/template" id="login_content">
       <div data-role="header">
             <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
@@ -74,14 +69,28 @@
       </div><!-- /header -->
   
       <div data-role="content">
-      <ul data-role="listview" id="listcategories" data-filter="true" data-filter-placeholder="Search categories..." data-inset="true">
-      </ul>
-      <button id="takepicture" type="submit" data-theme="b">Take Picture</button>
-      <button id="selectpicture" type="submit" data-theme="b">Select Picture</button>
-      <a href="#" id="getlocation" data-role="button" data-icon="refresh" data-theme="a">Get Location</a>
+            <div id="categorieslist">
+            </div>
+      
+            <div id="catdetails">
+            </div>
+
+            <input type="hidden" name="lat" id="_latfield" placeholder="lat">
+            <input type="hidden" name="lat" id="_lngfield" placeholder="lng">
+            <img id="location_map" src="" style="width:100%;" hidden="hidden"/>
+            <img id="camera_image" src="" style="width:100%;" hidden="hidden"/>
+            <a href="#" id="getlocation" data-role="button" data-icon="refresh" data-theme="a">Get Location</a>
+            <button id="takepicture" data-theme="b">Take Picture</a>
+            <button id="selectpicture" data-theme="b">Select Picture</a>
+            <button id="savebtn" data-theme="b">Save Report</button>
       </div>
 </script>
 
+<script type="text/javascript">
+    domain = "http://moth.dec.uc.pt/"
+    rootUrl= domain + "smartroads/"
+    var app = null;
+</script>
 <script src="js/libs/require.js" data-main="js/mobile"></script>
 
 </html>

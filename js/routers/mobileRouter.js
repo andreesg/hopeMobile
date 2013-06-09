@@ -2,7 +2,7 @@
 // =============
 
 // Includes file dependencies
-define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView", "../views/HomeView", "../models/SchemaModel", "../collections/SchemaCollection" ], function($, Backbone, LoginModel, LoginView, HomeView, SchemaModel, SchemaCollection) {
+define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView","../views/SchemaListView", "../views/HomeView", "../models/SchemaModel", "../collections/SchemaCollection" ], function($, Backbone, LoginModel, LoginView,SchemaListView, HomeView, SchemaModel, SchemaCollection) {
 
     // Extends Backbone.Router
     var CategoryRouter = Backbone.Router.extend( {
@@ -75,12 +75,11 @@ define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView", "../
                     token: token
                 },
                 success: function(collection, response) {
-                    //alert("Fetch success!");
-                    var categories = "";
-                    for (m in that.schemaList.models) {
-                         categories += "<li><a href='#'>"+that.schemaList.models[m].get('name')+"</a></li>";
-                    } 
-                    $("#listcategories").append(categories);
+                   that.appendSchemaList = new SchemaListView({
+                        model : that.schemaList
+                   });
+                   $("#categorieslist").html(that.appendSchemaList.el);
+                   $('select').selectmenu();
                 },
                 error: function(collection, response){
                     alert(JSON.stringify(response));
