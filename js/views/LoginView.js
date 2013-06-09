@@ -2,14 +2,14 @@
 // =============
 
 // Includes file dependencies
-define([ "jquery", "backbone","models/LoginModel" ], function( $, Backbone, LoginModel ) {
+define(["jquery", "backbone", "models/LoginModel"], function($, Backbone, LoginModel) {
 
     // Extends Backbone.View
-    var LoginView = Backbone.View.extend( {
-        events: { 
+    var LoginView = Backbone.View.extend({
+        events: {
             'click #submit': 'submitLogin',
         },
-        
+
         initialize: function() {
             console.log("init login view")
             _.bindAll(this, "submitLogin");
@@ -21,7 +21,7 @@ define([ "jquery", "backbone","models/LoginModel" ], function( $, Backbone, Logi
             var username = $("#username", this.el).val();
             var password = $("#password", this.el).val();
 
-            $.ajax(domain+"token/new.json", {
+            $.ajax(domain + "token/new.json", {
                 type: 'POST',
                 data: {
                     username: username,
@@ -55,7 +55,7 @@ define([ "jquery", "backbone","models/LoginModel" ], function( $, Backbone, Logi
             return this;
         }
 
-    } );
+    });
 
     // Returns the View class
     return LoginView;

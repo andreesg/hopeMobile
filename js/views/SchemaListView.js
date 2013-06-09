@@ -58,6 +58,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 			var that = this;
 
 			$("#savebtn").click(function() {
+				alert("save click!");
 
 				var options = new FileUploadOptions();
 				options.fileKey = "file"
@@ -83,6 +84,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 				params.save = true;
 
 				options.params = params;
+
 
 				var ft = new FileTransfer();
 				ft.upload($("#camera_image").attr("src"), rootUrl + "mobile/save/", function() {

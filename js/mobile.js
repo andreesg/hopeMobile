@@ -8,7 +8,8 @@ require.config({
             "jquery": "libs/jquery",
             "jquerymobile": "libs/jquerymobile",
             "underscore": "libs/lodash",
-            "backbone": "libs/backbone"
+            "backbone": "libs/backbone",
+            "cordova": "libs/cordova-2.7.0.js"
 
       },
 
@@ -39,7 +40,6 @@ require(["jquery", "backbone", "routers/mobileRouter"], function($, Backbone, Mo
       })
 
       require(["jquerymobile"], function() {
-            // Instantiates a new Backbone.js Mobile Router
             app = new Mobile();
       });
 });
