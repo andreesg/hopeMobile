@@ -2,7 +2,7 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone"], function($, Backbone) {
+define(["jquery", "backbone","cordova"], function($, Backbone, Cordova) {
 
     // Extends Backbone.View
     var HomeView = Backbone.View.extend({
@@ -20,6 +20,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             $(this.el).html(this.template);
 
             $("#getlocation").click(function(evt) {
+
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var coord_string = "" + position.coords.latitude + "," + position.coords.longitude;
 
