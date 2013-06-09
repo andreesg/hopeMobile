@@ -9,7 +9,7 @@ require.config({
             "jquerymobile": "libs/jquerymobile",
             "underscore": "libs/lodash",
             "backbone": "libs/backbone",
-            "cordova": "libs/cordova-2.7.0.js"
+            "cordova": "libs/cordova-2.7.0"
 
       },
 
