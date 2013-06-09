@@ -2,7 +2,7 @@
 // =============
 
 // Includes file dependencies
-define([ "jquery", "backbone"], function( $, Backbone ) {
+define(["jquery", "backbone"], function($, Backbone) {
 
 	var SchemaListView = Backbone.View.extend({
 		events: {
@@ -19,46 +19,46 @@ define([ "jquery", "backbone"], function( $, Backbone ) {
 		changedSelected: function() {
 			var schema = this.schemaModel.getByCid($("#listcategories :selected").val());
 
-            var fields = schema.get('fields');
+			var fields = schema.get('fields');
 
-            var form = '<form id="input_form">';
-            var fields = schema.get('fields');
+			var form = '<form id="input_form">';
+			var fields = schema.get('fields');
 
-            var has_photos = false;
+			var has_photos = false;
 
-            for(field in fields){
-                var name = field;
-                if(fields[field]['type'] == 'array#photo'){
-                    has_photos = true;
-                    continue;
-                }
+			for (field in fields) {
+				var name = field;
+				if (fields[field]['type'] == 'array#photo') {
+					has_photos = true;
+					continue;
+				}
 
-                if('readable' in fields[field]){
-                    name = fields[field]['readable'];
-                }
+				if ('readable' in fields[field]) {
+					name = fields[field]['readable'];
+				}
 
-                if('name' in fields[field]){
-                    name = fields[field]['name']
-                }
-                form += "<input type='text' name='"+field+"' id='"+field+"' placeholder='"+name+"'>";
-            }
+				if ('name' in fields[field]) {
+					name = fields[field]['name']
+				}
+				form += "<input type='text' name='" + field + "' id='" + field + "' placeholder='" + name + "'>";
+			}
 
-            if(has_photos) {
-            	$("#takepicture").show();
-            	$("#selectpicture").show();
-            } else {
-            	$("#takepicture").hide();
-            	$("#selectpicture").hide();
-            }
+			if (has_photos) {
+				$("#takepicture").show();
+				$("#selectpicture").show();
+			} else {
+				$("#takepicture").hide();
+				$("#selectpicture").hide();
+			}
 
-            form += "</form>";
-            $("#catdetails").html(form);
-            $("#input_form").trigger('create');
-            
-            var that = this;
+			form += "</form>";
+			$("#catdetails").html(form);
+			$("#input_form").trigger('create');
+
+			var that = this;
 
 			$("#savebtn").click(function() {
-				
+
 				var options = new FileUploadOptions();
 				options.fileKey = "file"
 				options.fileName = "uploaded image"
@@ -66,13 +66,13 @@ define([ "jquery", "backbone"], function( $, Backbone ) {
 				options.chunkedMode = false
 
 				var params = new Object();
-				for(field in fields){
-					if(fields[field]['type'] == 'array#photo') {
+				for (field in fields) {
+					if (fields[field]['type'] == 'array#photo') {
 						options.fileKey = field;
 						continue;
 					}
 
-					params[field] = $("#"+field).val();
+					params[field] = $("#" + field).val();
 				}
 
 				params['_categoryId'] = schema.get('_id')['$oid'];
@@ -85,10 +85,9 @@ define([ "jquery", "backbone"], function( $, Backbone ) {
 				options.params = params;
 
 				var ft = new FileTransfer();
-				ft.upload($("#camera_image").attr("src"), rootUrl+"mobile/save/", function() {
+				ft.upload($("#camera_image").attr("src"), rootUrl + "mobile/save/", function() {
 					alert("Saved successfully");
-				},
-				function(error){
+				}, function(error) {
 					alert(JSON.stringify(error));
 				}, options);
 
@@ -99,9 +98,9 @@ define([ "jquery", "backbone"], function( $, Backbone ) {
 			var that = this;
 			this.schemaModel = this.model;
 			var categories = "<select name='select-choice-1' id='listcategories'>"
-			
+
 			_.each(this.model.models, function(obj) {
-				categories += '<option value="'+obj.cid+'">'+obj.get('name')+'</option>'
+				categories += '<option value="' + obj.cid + '">' + obj.get('name') + '</option>'
 			});
 
 			categories += "</select>"

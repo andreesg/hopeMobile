@@ -2,15 +2,15 @@
 // ===================
 
 // Includes file dependencies
-define([ "jquery","backbone","models/SchemaModel" ], function($, Backbone, SchemaModel) {
+define(["jquery", "backbone", "models/SchemaModel"], function($, Backbone, SchemaModel) {
 
-    // Extends Backbone.Router
-    var Collection = Backbone.Collection.extend( {
-        model: SchemaModel,
-        url: rootUrl + "mobile/schemas/"
+	// Extends Backbone.Router
+	var Collection = Backbone.Collection.extend({
+		model: SchemaModel,
+		url: rootUrl + "mobile/schemas/"
 
-    });
-    // Returns the Model class
-    return Collection;
+	});
+	// Returns the Model class
+	return Collection;
 
 });

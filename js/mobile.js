@@ -1,5 +1,5 @@
 // Sets the require.js configuration for your application.
-require.config( {
+require.config({
 
       // 3rd party script alias names (Easier to type "jquery" than "libs/jquery-1.8.2.min")
       paths: {
@@ -16,30 +16,30 @@ require.config( {
       shim: {
 
             "backbone": {
-                  "deps": [ "underscore", "jquery" ],
-                  "exports": "Backbone"  //attaches "Backbone" to the window object
+                  "deps": ["underscore", "jquery"],
+                  "exports": "Backbone" //attaches "Backbone" to the window object
             }
 
       } // end Shim Configuration
 
-} );
+});
 
 // Includes File Dependencies
-require([ "jquery", "backbone", "routers/mobileRouter" ], function($, Backbone, Mobile) {
+require(["jquery", "backbone", "routers/mobileRouter"], function($, Backbone, Mobile) {
 
-	$( document ).on( "mobileinit",
-		// Set up the "mobileinit" handler before requiring jQuery Mobile's module
-		function() {
-			// Prevents all anchor click handling including the addition of active button state and alternate link bluring.
-			$.mobile.linkBindingEnabled = false;
+      $(document).on("mobileinit",
+      // Set up the "mobileinit" handler before requiring jQuery Mobile's module
 
-			// Disabling this will prevent jQuery Mobile from handling hash changes
-			$.mobile.hashListeningEnabled = false;
-		}
-	)
+      function() {
+            // Prevents all anchor click handling including the addition of active button state and alternate link bluring.
+            $.mobile.linkBindingEnabled = false;
 
-	require( [ "jquerymobile" ], function() {
-		// Instantiates a new Backbone.js Mobile Router
-		app = new Mobile();
-	});
+            // Disabling this will prevent jQuery Mobile from handling hash changes
+            $.mobile.hashListeningEnabled = false;
+      })
+
+      require(["jquerymobile"], function() {
+            // Instantiates a new Backbone.js Mobile Router
+            app = new Mobile();
+      });
 });

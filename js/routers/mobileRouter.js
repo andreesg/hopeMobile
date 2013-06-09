@@ -2,10 +2,10 @@
 // =============
 
 // Includes file dependencies
-define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView","../views/SchemaListView", "../views/HomeView", "../models/SchemaModel", "../collections/SchemaCollection" ], function($, Backbone, LoginModel, LoginView,SchemaListView, HomeView, SchemaModel, SchemaCollection) {
+define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../views/SchemaListView", "../views/HomeView", "../models/SchemaModel", "../collections/SchemaCollection"], function($, Backbone, LoginModel, LoginView, SchemaListView, HomeView, SchemaModel, SchemaCollection) {
 
     // Extends Backbone.Router
-    var CategoryRouter = Backbone.Router.extend( {
+    var CategoryRouter = Backbone.Router.extend({
 
         // The Router constructor
         initialize: function() {
@@ -34,7 +34,7 @@ define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView","../v
         launchAppOrAuth: function() {
             var that = this;
 
-            if(window.localStorage.getItem("user") != null) {
+            if (window.localStorage.getItem("user") != null) {
                 this.user = window.localStorage.getItem("user");
                 this.token = window.localStorage.getItem("auth_token");
 
@@ -43,7 +43,7 @@ define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView","../v
 
                 $.ajax({
                     'type': 'GET',
-                    'url':  domain+"token/" + token + "/" + user + ".json",
+                    'url': domain + "token/" + token + "/" + user + ".json",
                     success: function(data) {
                         if (data.success) {
                             that.launchApp();
@@ -52,7 +52,7 @@ define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView","../v
                         }
                         return false;
                     },
-                    error: function(xhr, type){
+                    error: function(xhr, type) {
                         that.env("hopemobile");
                     }
 
@@ -64,38 +64,39 @@ define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView","../v
 
         launchApp: function() {
             this.schemaList = new SchemaCollection();
-            
+
             var that = this;
             var user = window.localStorage.getItem("user");
             var token = window.localStorage.getItem("auth_token");
 
+            $.mobile.loading("show");
             this.schemaList.fetch({
                 data: {
                     user: user,
                     token: token
                 },
                 success: function(collection, response) {
-                   that.appendSchemaList = new SchemaListView({
-                        model : that.schemaList
-                   });
-                   $("#categorieslist").html(that.appendSchemaList.el);
-                   $('select').selectmenu();
+                    that.appendSchemaList = new SchemaListView({
+                        model: that.schemaList
+                    });
+                    $("#categorieslist").html(that.appendSchemaList.el);
+                    $('select').selectmenu();
                 },
-                error: function(collection, response){
+                error: function(collection, response) {
                     alert(JSON.stringify(response));
                 }
             });
 
-            var view = this[ "homeView" ];
-            $.mobile.changePage( "#home", {
+            var view = this["homeView"];
+            $.mobile.changePage("#home", {
                 reverse: false,
-                changeHash: false 
+                changeHash: false
             });
         },
 
         // Home method
         home: function() {
-            $.mobile.changePage( "#hopemobile" , {
+            $.mobile.changePage("#hopemobile", {
                 reverse: false,
                 changeHash: false
             });
@@ -103,14 +104,15 @@ define([ "jquery","backbone", "../models/LoginModel", "../views/LoginView","../v
 
         // Select env
         env: function(type) {
-            var currentView = this[ type + "View" ];
-            $.mobile.changePage( "#" + type, {
+            $.mobile.loading("show");
+            var currentView = this[type + "View"];
+            $.mobile.changePage("#" + type, {
                 reverse: false,
-                changeHash: false 
+                changeHash: false
             });
         },
 
-       
+
     });
     return CategoryRouter;
 

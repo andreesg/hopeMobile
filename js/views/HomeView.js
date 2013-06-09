@@ -38,10 +38,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 
             $("#takepicture").click(function(evt) {
                 navigator.camera.getPicture(function(fileURI) {
-                    //setTimeout(function(){alert("Success")}, 100);
-                    //SUCCESS
                     $("#camera_image").attr("src", fileURI);
-                    $("#camera_image").attr("style", "display:block;");
                     $("#camera_image").show();
                 }, function(message) {
                     setTimeout(function() {
@@ -58,12 +55,10 @@ define(["jquery", "backbone"], function($, Backbone) {
             });
 
             $("#selectpicture").click(function(evt) {
-                //alert("clicked to shoot");
+                alert("select picture");
                 navigator.camera.getPicture(function(fileURI) {
-                    //setTimeout(function(){alert("Success")}, 100);
-                    //SUCCESS
                     $("#camera_image").attr("src", fileURI);
-                    $("#camera_image").attr("style", "display:block;");
+                    $("#camera_image").show();
                 }, function(message) {
                     setTimeout(function() {
                         alert(message)
