@@ -92,6 +92,10 @@ define(["jquery", "backbone"], function($, Backbone) {
 				var ft = new FileTransfer();
 				ft.upload($("#camera_image").attr("src"), rootUrl + "mobile/save/", function() {
 					alert("Saved successfully");
+					$("#takepicture").hide();
+					$("#selectpicture").hide();
+					$("#camera_image").hide();
+					$("#location_map").hide();
 				}, function(error) {
 					alert(JSON.stringify(error));
 				}, options);
