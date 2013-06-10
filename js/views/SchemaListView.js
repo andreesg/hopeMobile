@@ -85,7 +85,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 
 				options.params = params;
 
-
+				alert(JSON.stringify(options));
 				var ft = new FileTransfer();
 				ft.upload($("#camera_image").attr("src"), rootUrl + "mobile/save/", function() {
 					alert("Saved successfully");
