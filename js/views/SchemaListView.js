@@ -17,6 +17,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 		},
 
 		changedSelected: function() {
+				
 			var schema = this.schemaModel.getByCid($("#listcategories :selected").val());
 
 			var fields = schema.get('fields');
@@ -58,8 +59,10 @@ define(["jquery", "backbone"], function($, Backbone) {
 			var that = this;
 
 			$("#savebtn").click(function() {
-				alert("save click!");
-
+				//alert("save click!");
+				that.user = window.localStorage.getItem("user");
+            	that.token = window.localStorage.getItem("auth_token");
+			
 				var options = new FileUploadOptions();
 				options.fileKey = "file"
 				options.fileName = "uploaded image"
@@ -85,7 +88,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 
 				options.params = params;
 
-				alert(JSON.stringify(options));
+				//alert(JSON.stringify(options));
 				var ft = new FileTransfer();
 				ft.upload($("#camera_image").attr("src"), rootUrl + "mobile/save/", function() {
 					alert("Saved successfully");
