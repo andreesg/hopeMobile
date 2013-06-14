@@ -45,8 +45,8 @@ define(["jquery", "backbone"], function($, Backbone) {
 			}
 
 			if (has_photos) {
-				$("#takepicture").show();
-				$("#selectpicture").show();
+				$("#takepicture").closest('.ui-btn').show();
+				$("#selectpicture").closest('.ui-btn').show();
 			} else {
 				$("#takepicture").closest('.ui-btn').hide();
 				$("#selectpicture").closest('.ui-btn').hide();
