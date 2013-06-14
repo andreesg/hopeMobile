@@ -48,8 +48,8 @@ define(["jquery", "backbone"], function($, Backbone) {
 				$("#takepicture").show();
 				$("#selectpicture").show();
 			} else {
-				$("#takepicture").hide();
-				$("#selectpicture").hide();
+				$("#takepicture").closest('.ui-btn').hide();
+				$("#selectpicture").closest('.ui-btn').hide();
 			}
 
 			form += "</form>";
