@@ -56,7 +56,8 @@ define(["jquery", "backbone","cordova"], function($, Backbone, Cordova) {
             });
 
             $("#selectpicture").click(function(evt) {
-                alert("select picture");
+                //alert("select picture");
+                //$.mobile.loading("show");
                 navigator.camera.getPicture(function(fileURI) {
                     $("#camera_image").attr("src", fileURI);
                     $("#camera_image").show();

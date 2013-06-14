@@ -9,28 +9,23 @@
 
       <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
 
+      <style>
+
+      body {
+            transform: translate3d(0,0,0);
+      }
+
+      </style>
 </head>
 <body>
 
-<div id="hopemobile" data-role="page" data-title="Hope">
-  
+<div id="login" data-role="page" data-title="Hope">
       <div data-role="header">
             <h1>Hope</h1>
-      </div><!-- /header -->
-  
-      <div data-role="content">
-            <h2>Report</h2>
-            <ul data-role="listview" data-inset="true">
-                  <li><a href="#hope?login" class="login">Login</a></li>
-                  <li><a href="#hope?about" class="about">About</a></li>
-            </ul>
-      </div><!-- /content -->
-
-</div>
-
-<div id="login" data-role="page" data-title="Login">
-
-      
+      </div>
+      <div data-role="content" id="logincontent">
+           
+      </div>
 </div>
 
 <div id="about" data-role="page" data-title="About">
@@ -39,29 +34,21 @@
             <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>About</h1>
       </div><!-- /header -->
-
 </div>
 
 <div id="home" data-role="page" data-title="Home">
 
 </div>
 
-
 </body>
 
 <script type="text/template" id="login_content">
-      <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
-            <h1>Hope</h1>
-      </div><!-- /header -->
-      <div data-role="content">
             <input type="text" name="username" id="username" value="" placeholder="email@example.com">
             <input type="password" name="password" id="password" value="" autocomplete="off" placeholder="password">
             <form>
                   <input type="submit" id="submit" value="sign in" data-theme="b">
                   <input type="submit" value="sign up" data-theme="a">
             </form>
-      </div>
 </script>
 <script type="text/template" id="home_content">
       <div data-role="header">

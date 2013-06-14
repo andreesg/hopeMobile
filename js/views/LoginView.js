@@ -11,7 +11,7 @@ define(["jquery", "backbone", "models/LoginModel"], function($, Backbone, LoginM
         },
 
         initialize: function() {
-            console.log("init login view")
+            //console.log("init login view")
             _.bindAll(this, "submitLogin");
             var that = this;
             this.render();
@@ -38,10 +38,7 @@ define(["jquery", "backbone", "models/LoginModel"], function($, Backbone, LoginM
                 },
 
                 error: function(xhr, error, errorThrown) {
-                    $.mobile.changePage("#hopemobile", {
-                        reverse: false,
-                        changeHash: false
-                    });
+                    alert("Login error!");                
                 }
             });
 
@@ -52,6 +49,7 @@ define(["jquery", "backbone", "models/LoginModel"], function($, Backbone, LoginM
         render: function() {
             this.template = _.template($("#login_content").html());
             $(this.el).html(this.template);
+            $("#login").trigger("create");
             return this;
         }
 

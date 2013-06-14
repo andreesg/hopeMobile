@@ -37,6 +37,7 @@ require(["jquery", "backbone", "routers/mobileRouter"], function($, Backbone, Mo
 
             // Disabling this will prevent jQuery Mobile from handling hash changes
             $.mobile.hashListeningEnabled = false;
+            $.mobile.defaultPageTransition = "slide";
       })
 
       require(["jquerymobile"], function() {

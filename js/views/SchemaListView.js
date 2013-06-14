@@ -67,7 +67,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 				options.fileKey = "file"
 				options.fileName = "uploaded image"
 				//options.mimeType = "multipart/form-data"
-				options.chunkedMode = false
+				options.chunkedMode = false // nginx server
 
 				var params = new Object();
 				for (field in fields) {
@@ -90,12 +90,14 @@ define(["jquery", "backbone"], function($, Backbone) {
 
 				//alert(JSON.stringify(options));
 				var ft = new FileTransfer();
+				$.mobile.loading("show");
 				ft.upload($("#camera_image").attr("src"), rootUrl + "mobile/save/", function() {
 					alert("Saved successfully");
 					$("#takepicture").hide();
 					$("#selectpicture").hide();
 					$("#camera_image").hide();
 					$("#location_map").hide();
+					$.mobile.loading("hide");
 				}, function(error) {
 					alert(JSON.stringify(error));
 				}, options);

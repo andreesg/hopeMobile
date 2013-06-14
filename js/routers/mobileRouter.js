@@ -11,24 +11,27 @@ define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../
         initialize: function() {
 
             // Instantiates a new Login View
-            console.log("init view");
+            //console.log("init view");
             this.loginView = new LoginView({
-                el: "#login"
+                el: "#logincontent"
             });
 
-            // Instantiates a new Login View
+            // Instantiates a new Home View
             this.homeView = new HomeView({
                 el: "#home"
             });
 
             Backbone.history.start();
-            this.launchAppOrAuth();
         },
 
         // Backbone.js Routes
         routes: {
             "": "home",
             "hope?:type": "env"
+        },
+
+        events: {
+            'click .back': window.history.back
         },
 
         launchAppOrAuth: function() {
@@ -48,17 +51,16 @@ define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../
                         if (data.success) {
                             that.launchApp();
                         } else {
-                            that.env("hopemobile");
+                            that.env("login");
                         }
                         return false;
                     },
                     error: function(xhr, type) {
-                        that.env("hopemobile");
+                        that.env("login");
                     }
-
                 });
             } else {
-                this.env("hopemobile");
+                this.env("login");
             }
         },
 
@@ -81,31 +83,24 @@ define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../
                     });
                     $("#categorieslist").html(that.appendSchemaList.el);
                     $('select').selectmenu();
+                    $.mobile.changePage("#home", {
+                        reverse: false,
+                        changeHash: false
+                    });
                 },
                 error: function(collection, response) {
                     alert(JSON.stringify(response));
                 }
             });
-
-            var view = this["homeView"];
-            $.mobile.changePage("#home", {
-                reverse: false,
-                changeHash: false
-            });
         },
 
         // Home method
         home: function() {
-            $.mobile.changePage("#hopemobile", {
-                reverse: false,
-                changeHash: false
-            });
+            this.launchAppOrAuth();
         },
 
         // Select env
         env: function(type) {
-            $.mobile.loading("show");
-            var currentView = this[type + "View"];
             $.mobile.changePage("#" + type, {
                 reverse: false,
                 changeHash: false
