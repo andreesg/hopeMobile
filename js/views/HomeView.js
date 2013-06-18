@@ -2,7 +2,7 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone","cordova"], function($, Backbone, Cordova) {
+define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/maps/api/js?sensor=false"], function($, Backbone, Cordova, gmap, google) {
 
     // Extends Backbone.View
     var HomeView = Backbone.View.extend({
@@ -20,7 +20,7 @@ define(["jquery", "backbone","cordova"], function($, Backbone, Cordova) {
             $(this.el).html(this.template);
 
             $("#getlocation").click(function(evt) {
-
+                $.mobile.loading("show");
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var coord_string = "" + position.coords.latitude + "," + position.coords.longitude;
 
@@ -28,11 +28,12 @@ define(["jquery", "backbone","cordova"], function($, Backbone, Cordova) {
                     $("#_lngfield").val(position.coords.longitude);
 
                     $("#location_map").attr("src", "https://maps.googleapis.com/maps/api/staticmap?center=" + coord_string + "&sensor=true&size=400x400&markers=size:tiny|" + coord_string);
-                    console.log($("#location_map").attr("src"));
+                    //console.log($("#location_map").attr("src"));
+                    $.mobile.loading("hide");
                     $("#location_map").show();
                 }, function(error) {
                     alert("error location!");
-                })
+                });
 
                 evt.preventDefault();
             });
@@ -74,6 +75,14 @@ define(["jquery", "backbone","cordova"], function($, Backbone, Cordova) {
 
                 evt.preventDefault();
             });
+
+            $('#location_map').gmap().bind('init', function(ev, map) {
+                $('#location_map').gmap('addMarker', {
+                    'position': '57.7973333,12.0502107',
+                    'bounds': true
+                });
+            });
+
             return this;
         }
 

@@ -6,14 +6,32 @@
       <meta name="description" content="">
 
       <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-
-      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
-
+      <link rel="stylesheet" href="css/jquery.mobile.flatui.min.css" />
       <style>
 
       body {
-            transform: translate3d(0,0,0);
+          transform: translate3d(0,0,0);
       }
+
+      html, body, div[id="home"] {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+ 
+         #home_content {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            border-width: 0px;
+        }
+ 
+        #location_map {
+            height: 100%;
+            width: 100%;
+        }
 
       </style>
 </head>
@@ -36,7 +54,7 @@
       </div><!-- /header -->
 </div>
 
-<div id="home" data-role="page" data-title="Home">
+<div id="home" data-role="page" data-title="Hope" data-id="myfooter">
 
 </div>
 
@@ -51,26 +69,26 @@
             </form>
 </script>
 <script type="text/template" id="home_content">
-      <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
-            <h1>Home</h1>
-      </div><!-- /header -->
-  
-      <div data-role="content">
+      <div data-role="panel" id="mypanel" data-display="overlay" data-theme="a" data-id="myfooter"> 
             <div id="categorieslist">
             </div>
       
             <div id="catdetails">
             </div>
-
-            <input type="hidden" name="lat" id="_latfield" placeholder="lat">
-            <input type="hidden" name="lat" id="_lngfield" placeholder="lng">
-            <img id="location_map" src="" style="width:100%;" hidden="hidden"/>
-            <img id="camera_image" src="" style="width:100%;" hidden="hidden"/>
             <a href="#" id="getlocation" data-role="button" data-icon="refresh" data-theme="a">Get Location</a>
             <button id="takepicture" data-theme="b">Take Picture</button>
             <button id="selectpicture" data-theme="b">Select Picture</button>
             <button id="savebtn" data-theme="b">Save Report</button>
+            <input type="hidden" name="lat" id="_latfield" placeholder="lat">
+            <input type="hidden" name="lat" id="_lngfield" placeholder="lng">
+            <img id="camera_image" src="" style="width:100%;" hidden="hidden"/>
+      </div>
+      <div data-role="content" id="home_content">
+        <div id="location_map"></div>
+      </div>
+      <div id="myfooter" data-role="footer" data-position="fixed">
+          <a href='#mypanel' data-role="button">Report</a>
+          <a href='#mypanel' data-role="button">Get Location</a>
       </div>
 </script>
 

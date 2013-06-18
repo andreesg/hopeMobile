@@ -9,7 +9,10 @@ require.config({
             "jquerymobile": "libs/jquerymobile",
             "underscore": "libs/lodash",
             "backbone": "libs/backbone",
-            "cordova": "libs/cordova-2.7.0"
+            "cordova": "libs/cordova-2.7.0",
+            "gmap": "libs/jquery.ui.map",
+            "async": "libs/async",
+            "goog": "libs/goog"
 
       },
 
@@ -20,7 +23,6 @@ require.config({
                   "deps": ["underscore", "jquery"],
                   "exports": "Backbone" //attaches "Backbone" to the window object
             }
-
       } // end Shim Configuration
 
 });
@@ -38,7 +40,8 @@ require(["jquery", "backbone", "routers/mobileRouter"], function($, Backbone, Mo
             // Disabling this will prevent jQuery Mobile from handling hash changes
             $.mobile.hashListeningEnabled = false;
             $.mobile.defaultPageTransition = "slide";
-      })
+
+      });
 
       require(["jquerymobile"], function() {
             app = new Mobile();

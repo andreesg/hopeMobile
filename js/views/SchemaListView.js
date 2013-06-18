@@ -93,11 +93,12 @@ define(["jquery", "backbone"], function($, Backbone) {
 				$.mobile.loading("show");
 				ft.upload($("#camera_image").attr("src"), rootUrl + "mobile/save/", function() {
 					alert("Saved successfully");
-					$("#takepicture").hide();
-					$("#selectpicture").hide();
+					$.mobile.loading("hide");
+					$("#takepicture").closest('.ui-btn').hide();
+					$("#selectpicture").closest('.ui-btn').hide();
 					$("#camera_image").hide();
 					$("#location_map").hide();
-					$.mobile.loading("hide");
+					$("#catdetails").html("");
 				}, function(error) {
 					alert(JSON.stringify(error));
 				}, options);
