@@ -41,7 +41,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 				if ('name' in fields[field]) {
 					name = fields[field]['name']
 				}
-				form += "<input type='text' name='" + field + "' id='" + field + "' placeholder='" + name + "'>";
+				form += "<input type='text' name='" + field + "' id='" + field + "' placeholder='" + name + "' data-theme='b'>";
 			}
 
 			if (has_photos) {
