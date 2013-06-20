@@ -19,6 +19,7 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
             this.template = _.template($("#home_content").html());
             $(this.el).html(this.template);
 
+
             $("#getlocation").click(function(evt) {
                 $.mobile.loading("show");
                 navigator.geolocation.getCurrentPosition(function(position) {
