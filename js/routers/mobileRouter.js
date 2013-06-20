@@ -16,7 +16,7 @@ define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../
                 el: "#logincontent"
             });
 
-            console.log(google);
+            console.log(window.google);
             // Instantiates a new Home View
             this.homeView = new HomeView({
                 el: "#home"
