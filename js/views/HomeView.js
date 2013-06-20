@@ -27,7 +27,7 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
                     $('#location_map').gmap('addMarker', {
                         'position': clientPosition,
                         'bounds': true,
-                        'zoom': 7
+                        'zoom': 5
                     });
                     $.mobile.loading("hide");
                 }, function(error) {
@@ -81,7 +81,7 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
                 $('#location_map').gmap('addMarker', {
                     'position': '40.208696,-8.425400',
                     'bounds': true,
-                    'zoom': 7
+                    'zoom': 5
                 });
             });
 
