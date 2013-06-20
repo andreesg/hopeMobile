@@ -12,8 +12,8 @@ require.config({
             "cordova": "libs/cordova-2.7.0",
             "gmap": "libs/jquery.ui.map",
             "async": "libs/async",
-            "goog": "libs/goog"
-
+            "goog": "libs/goog",
+            "google": "http://maps.google.com/maps/api/js?sensor=false"
       },
 
       // Sets the configuration for your third party scripts that are not AMD compatible
