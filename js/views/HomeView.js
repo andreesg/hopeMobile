@@ -2,7 +2,7 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/maps/api/js?sensor=false"], function($, Backbone, Cordova, gmap, google) {
+define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/maps/api/js?sensor=false!callback"], function($, Backbone, Cordova, gmap, google) {
 
     // Extends Backbone.View
     var HomeView = Backbone.View.extend({
