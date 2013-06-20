@@ -27,7 +27,7 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
                     $('#location_map').gmap('addMarker', {
                         'position': clientPosition,
                         'bounds': true,
-                        'zoom': 5
+                        'zoom': 2
                     });
                     $.mobile.loading("hide");
                 }, function(error) {
@@ -78,10 +78,10 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
             $("#home_content").height($("body").height()-38);
 
             $('#location_map').gmap().bind('init', function(ev, map) {
-                $('#location_map').gmap('addMarker', {
-                    'position': '40.208696,-8.425400',
+                $('#location_map').gmap({
+                    'center': '40.208696,-8.425400',
                     'bounds': true,
-                    'zoom': 5
+                    'zoom': 2
                 });
             });
 
