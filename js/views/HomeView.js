@@ -22,17 +22,23 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
             $("#getlocation").click(function(evt) {
                 $.mobile.loading("show");
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    var coord_string = "" + position.coords.latitude + "," + position.coords.longitude;
-
-                    $("#_latfield").val(position.coords.latitude);
-                    $("#_lngfield").val(position.coords.longitude);
-
-                    $("#location_map").attr("src", "https://maps.googleapis.com/maps/api/staticmap?center=" + coord_string + "&sensor=true&size=400x400&markers=size:tiny|" + coord_string);
-                    //console.log($("#location_map").attr("src"));
+                    var clientPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    console.log(clientPosition);
+                    $('#location_map').gmap('addMarker', {
+                        'position': clientPosition,
+                        'bounds': true
+                    });
+                    $('#location_map').gmap('addShape', 'Circle', {
+                        'strokeWeight': 0,
+                        'fillColor': "#008595",
+                        'fillOpacity': 0.25,
+                        'center': clientPosition,
+                        'radius': 15,
+                        'clickable': false
+                    });
                     $.mobile.loading("hide");
-                    $("#location_map").show();
                 }, function(error) {
-                    alert("error location!");
+                    $.mobile.loading("hide");
                 });
 
                 evt.preventDefault();
@@ -76,16 +82,13 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
                 evt.preventDefault();
             });
 
+            $("#home_content").height($("body").height()-38);
+
             $('#location_map').gmap().bind('init', function(ev, map) {
-                $('#location_map').gmap('addMarker', {
-                    'position': '57.7973333,12.0502107',
-                    'bounds': true
-                });
+                // google maps
             });
 
-            console.log("location map:");
-            console.log($('#location_map'));
-
+            //console.log($("#home_content").height());
             return this;
         }
 
