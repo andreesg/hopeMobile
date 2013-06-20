@@ -2,7 +2,7 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone", "cordova", "gmap", "async!//maps.google.com/maps/api/js?sensor=false"], function($, Backbone, Cordova, gmap, google) {
+define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/maps/api/js?sensor=false"], function($, Backbone, Cordova, gmap, google) {
 
     // Extends Backbone.View
     var HomeView = Backbone.View.extend({
@@ -20,7 +20,6 @@ define(["jquery", "backbone", "cordova", "gmap", "async!//maps.google.com/maps/a
             $(this.el).html(this.template);
 
             $("#getlocation").click(function(evt) {
-                console.log(google);
                 $.mobile.loading("show");
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var clientPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);

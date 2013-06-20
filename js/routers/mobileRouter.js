@@ -2,7 +2,7 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../views/SchemaListView", "../views/HomeView", "../models/SchemaModel", "../collections/SchemaCollection"], function($, Backbone, LoginModel, LoginView, SchemaListView, HomeView, SchemaModel, SchemaCollection) {
+define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../views/SchemaListView", "../views/HomeView", "../models/SchemaModel", "../collections/SchemaCollection", "async!http://maps.google.com/maps/api/js?sensor=false"], function($, Backbone, LoginModel, LoginView, SchemaListView, HomeView, SchemaModel, SchemaCollection, google) {
 
     // Extends Backbone.Router
     var CategoryRouter = Backbone.Router.extend({
@@ -16,6 +16,7 @@ define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../
                 el: "#logincontent"
             });
 
+            console.log(google);
             // Instantiates a new Home View
             this.homeView = new HomeView({
                 el: "#home"
