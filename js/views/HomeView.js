@@ -77,12 +77,8 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
 
             $("#home_content").height($("body").height()-38);
 
-            $('#location_map').gmap().bind('init', function(ev, map) {
-                $('#location_map').gmap({
-                    'center': '40.208696,-8.425400',
-                    'bounds': true,
-                    'zoom': 2
-                });
+            $('#location_map').gmap({'center':'40.208696,-8.425400', 'disableDefaultUI':true}).bind('init', function(ev, map) {
+                // google maps
             });
 
             //console.log($("#home_content").height());
