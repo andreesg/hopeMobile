@@ -83,6 +83,9 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
                 });
             });
 
+            console.log("location map:");
+            console.log($('#location_map'));
+
             return this;
         }
 
