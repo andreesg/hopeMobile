@@ -22,21 +22,23 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
             $("#getlocation").click(function(evt) {
                 $.mobile.loading("show");
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    var clientPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                    console.log(clientPosition);
-                    $('#location_map').gmap('addMarker', {
-                        'position': clientPosition,
-                        'bounds': true
+                    require(['async!http://maps.google.com/maps/api/js?sensor=false!callback'], function(){
+                        var clientPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                        console.log(clientPosition);
+                        $('#location_map').gmap('addMarker', {
+                            'position': clientPosition,
+                            'bounds': true
+                        });
+                        $('#location_map').gmap('addShape', 'Circle', {
+                            'strokeWeight': 0,
+                            'fillColor': "#008595",
+                            'fillOpacity': 0.25,
+                            'center': clientPosition,
+                            'radius': 15,
+                            'clickable': false
+                        });
+                        $.mobile.loading("hide");
                     });
-                    $('#location_map').gmap('addShape', 'Circle', {
-                        'strokeWeight': 0,
-                        'fillColor': "#008595",
-                        'fillOpacity': 0.25,
-                        'center': clientPosition,
-                        'radius': 15,
-                        'clickable': false
-                    });
-                    $.mobile.loading("hide");
                 }, function(error) {
                     $.mobile.loading("hide");
                 });
