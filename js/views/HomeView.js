@@ -23,10 +23,10 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
                 $.mobile.loading("show");
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var clientPosition = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                    console.log(clientPosition);
                     $('#location_map').gmap('addMarker', {
                         'position': clientPosition,
-                        'bounds': true
+                        'bounds': true,
+                        'zoom': 5
                     });
                     $.mobile.loading("hide");
                 }, function(error) {
@@ -77,7 +77,10 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
             $("#home_content").height($("body").height()-38);
 
             $('#location_map').gmap().bind('init', function(ev, map) {
-                // google maps
+                $('#location_map').gmap('addMarker', {
+                    'position': '40.210081,-8.446480',
+                    'bounds': true
+                });
             });
 
             //console.log($("#home_content").height());
