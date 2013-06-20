@@ -2,7 +2,7 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/maps/api/js?sensor=false"], function($, Backbone, Cordova, gmap, google) {
+define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/maps/api/js?sensor=false", "jqueryui"], function($, Backbone, Cordova, gmap, google, gmapsui) {
 
     // Extends Backbone.View
     var HomeView = Backbone.View.extend({
@@ -27,6 +27,14 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
                     $('#location_map').gmap('addMarker', {
                         'position': clientPosition,
                         'bounds': true
+                    });
+                    $('#location_map').gmap('addShape', 'Circle', {
+                        'strokeWeight': 0,
+                        'fillColor': "#008595",
+                        'fillOpacity': 0.25,
+                        'center': clientPosition,
+                        'radius': 15,
+                        'clickable': false
                     });
                     $.mobile.loading("hide");
                 }, function(error) {
