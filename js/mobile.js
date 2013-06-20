@@ -11,6 +11,7 @@ require.config({
             "backbone": "libs/backbone",
             "cordova": "libs/cordova-2.7.0",
             "gmap": "libs/jquery.ui.map",
+            "jqueryui": "libs/jquery.ui.map.extensions",
             "async": "libs/async",
             "goog": "libs/goog"
       },
