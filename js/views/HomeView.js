@@ -24,6 +24,8 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
                 $.mobile.loading("show");
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var clientPosition = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    $("#_latfield").val(position.coords.latitude);
+                    $("#_lngfield").val(position.coords.longitude);
                     $('#location_map').gmap('addMarker', {
                         'position': clientPosition,
                         'bounds':true     
