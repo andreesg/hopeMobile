@@ -46,4 +46,14 @@ require(["jquery", "backbone", "routers/mobileRouter"], function($, Backbone, Mo
       require(["jquerymobile"], function() {
             app = new Mobile();
       });
+
+      function onDeviceReady() {
+            // on device ready
+      }
+      $(document).ready(function() {
+            $(document).bind('deviceready', function() {
+                  // Phonegap ready
+                  onDeviceReady();
+            });
+      });
 });
