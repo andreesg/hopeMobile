@@ -28,14 +28,6 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
                         'position': clientPosition,
                         'bounds': true
                     });
-                    $('#location_map').gmap('addShape', 'Circle', {
-                        'strokeWeight': 0,
-                        'fillColor': "#008595",
-                        'fillOpacity': 0.25,
-                        'center': clientPosition,
-                        'radius': 15,
-                        'clickable': false
-                    });
                     $.mobile.loading("hide");
                 }, function(error) {
                     $.mobile.loading("hide");
