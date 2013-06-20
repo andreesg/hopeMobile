@@ -22,7 +22,7 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
             $("#getlocation").click(function(evt) {
                 $.mobile.loading("show");
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    var clientPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    var clientPosition = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                     console.log(clientPosition);
                     $('#location_map').gmap('addMarker', {
                         'position': clientPosition,
