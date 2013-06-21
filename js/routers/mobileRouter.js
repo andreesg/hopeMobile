@@ -21,6 +21,12 @@ define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../
                 el: "#home"
             });
 
+            $('.page-map').live("pagecreate", function() {
+                $('#location_map').gmap({'center':'40.208696,-8.425400', 'disableDefaultUI':true, 'bounds':true, 'zoom':15}).bind('init', function(ev, map) {
+                        // google maps
+                });
+            });
+
             Backbone.history.start();
         },
 

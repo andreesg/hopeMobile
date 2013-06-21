@@ -43,7 +43,7 @@ require(["jquery", "backbone", "routers/mobileRouter"], function($, Backbone, Mo
 
       });
 
-      require(["jquerymobile"], function() {
+      require(["jquerymobile", "gmap"], function() {
             app = new Mobile();
       });
 
