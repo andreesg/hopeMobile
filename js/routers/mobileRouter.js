@@ -2,28 +2,35 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../views/SchemaListView", "../views/HomeView", "../models/SchemaModel", "../collections/SchemaCollection", "async!http://maps.google.com/maps/api/js?sensor=false"], function($, Backbone, LoginModel, LoginView, SchemaListView, HomeView, SchemaModel, SchemaCollection, google) {
+define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../views/SchemaListView", "../views/HomeView","../views/DetailsView", "../models/SchemaModel", "../collections/SchemaCollection", "async!http://maps.google.com/maps/api/js?sensor=false"], function($, Backbone, LoginModel, LoginView, SchemaListView, HomeView, DetailsView, SchemaModel, SchemaCollection, google) {
 
     // Extends Backbone.Router
     var CategoryRouter = Backbone.Router.extend({
 
         // The Router constructor
         initialize: function() {
+            this.mapOcurrences = null;
 
-            // Instantiates a new Login View
-            //console.log("init view");
             this.loginView = new LoginView({
                 el: "#logincontent"
             });
 
-            // Instantiates a new Home View
             this.homeView = new HomeView({
                 el: "#home"
             });
 
+            this.detailsView = new DetailsView({
+                el: "#details"
+            });
+
             $('.page-map').live("pagecreate", function() {
-                $('#location_map').gmap({'center':'40.208696,-8.425400', 'disableDefaultUI':true, 'bounds':true, 'zoom':15}).bind('init', function(ev, map) {
-                        // google maps
+                $('#location_map').gmap({
+                    'center': '40.208696,-8.425400',
+                    'disableDefaultUI': true,
+                    'bounds': true,
+                    'zoom': 15
+                }).bind('init', function(ev, map) {
+                    // maps
                 });
             });
 
@@ -33,7 +40,8 @@ define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../
         // Backbone.js Routes
         routes: {
             "": "home",
-            "hope?:type": "env"
+            "hope?:type": "env",
+            "details?:id": "details"
         },
 
         events: {
@@ -98,6 +106,9 @@ define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../
                     alert(JSON.stringify(response));
                 }
             });
+
+            // fetch ocurrences
+            // add to this.mapOcurrences
         },
 
         // Home method
@@ -112,6 +123,20 @@ define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../
                 changeHash: false
             });
         },
+
+        details: function(id) {
+            // set photo
+            // set coords img
+            var coord_string = "40.208696,-8.425400";
+            var w = $("body").width();
+            console.log(w);
+            $("#details_coords").attr("src", "https://maps.googleapis.com/maps/api/staticmap?center="+coord_string+"&sensor=true&size="+w+"x"+400+"&markers=size:tiny|"+coord_string);
+            $("#details_coords").show();
+            $.mobile.changePage("#details", {
+                reverse: false,
+                changeHash: false
+            });
+        }
 
 
     });
