@@ -19,17 +19,21 @@ define(["jquery", "backbone", "cordova", "gmap", "async!http://maps.google.com/m
             this.template = _.template($("#home_content").html());
             $(this.el).html(this.template);
 
-
             $("#getlocation").click(function(evt) {
+                var marker;
                 $.mobile.loading("show");
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var clientPosition = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                     $("#_latfield").val(position.coords.latitude);
                     $("#_lngfield").val(position.coords.longitude);
-                    $('#location_map').gmap('addMarker', {
+                    marker = $('#location_map').gmap('addMarker', {
                         'position': clientPosition,
-                        'bounds': true
+                        'bounds': true,
+                        'draggable': true
                     });
+                    /*marker.addEventListener("dragend", function(opts) {
+                        alert(JSON.stringify(opts));
+                    });*/
                     $.mobile.loading("hide");
                 }, function(error) {
                     $.mobile.loading("hide");

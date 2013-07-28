@@ -30,7 +30,12 @@ define(["jquery", "backbone", "../models/LoginModel", "../views/LoginView", "../
                     'bounds': true,
                     'zoom': 15
                 }).bind('init', function(ev, map) {
-                    // maps
+                    /*$('#location_map').gmap('addMarker', {
+                        'position': '40.208696,-8.425400',
+                        'draggable': true
+                    }).click(function() {
+                        window.location.href = "#details?123";
+                    });*/
                 });
             });
 

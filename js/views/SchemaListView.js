@@ -97,7 +97,6 @@ define(["jquery", "backbone"], function($, Backbone) {
 					$("#takepicture").closest('.ui-btn').hide();
 					$("#selectpicture").closest('.ui-btn').hide();
 					$("#camera_image").hide();
-					$("#location_map").hide();
 					$("#catdetails").html("");
 				}, function(error) {
 					alert(JSON.stringify(error));
