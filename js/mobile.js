@@ -28,7 +28,7 @@ require.config({
 });
 
 // Includes File Dependencies
-require(["jquery", "backbone", "routers/mobileRouter"], function($, Backbone, Mobile) {
+require(["jquery", "backbone", "routers/mobileRouter"], function($, Backbone, MobileRouter) {
 
       $(document).on("mobileinit",
       // Set up the "mobileinit" handler before requiring jQuery Mobile's module
@@ -39,17 +39,21 @@ require(["jquery", "backbone", "routers/mobileRouter"], function($, Backbone, Mo
 
             // Disabling this will prevent jQuery Mobile from handling hash changes
             $.mobile.hashListeningEnabled = false;
+
+            // set default page transition to slide
             $.mobile.defaultPageTransition = "slide";
 
       });
 
-      require(["jquerymobile", "gmap"], function() {
-            app = new Mobile();
-      });
-
       function onDeviceReady() {
             // on device ready
+            // require jquery mobile module
+            // INIT APP
+            require(["jquerymobile", "gmap"], function() {
+                  app = new MobileRouter();
+            });
       }
+
       $(document).ready(function() {
             $(document).bind('deviceready', function() {
                   // Phonegap ready
