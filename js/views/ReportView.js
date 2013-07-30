@@ -81,9 +81,9 @@ define(["jquery", "backbone", "../collections/CategoryCollection"], function($, 
 
         renderCategories: function(collection, response) {
             console.log("[ReportView] Render categories.");
-            console.log(collection);
-            console.log(response);
-
+            collection.each(function(model) {
+                console.log(model);
+            });
         },
  
         render: function() {
