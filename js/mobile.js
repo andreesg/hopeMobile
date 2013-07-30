@@ -45,13 +45,15 @@ require(["jquery", "backbone", "routers/mobileRouter"], function($, Backbone, Mo
 
       });
 
+      require(["jquerymobile", "gmap"], function() {
+            app = new MobileRouter();
+      });
+
       function onDeviceReady() {
             // on device ready
             // require jquery mobile module
             // INIT APP
-            require(["jquerymobile", "gmap"], function() {
-                  app = new MobileRouter();
-            });
+            
       }
 
       $(document).ready(function() {

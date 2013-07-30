@@ -1,11 +1,11 @@
-// Schema Collection
+// Category Collection
 // ===================
 
 // Includes file dependencies
-define(["jquery", "backbone", "models/SchemaModel"], function($, Backbone, CategoryModel) {
+define(["jquery", "backbone", "models/CategoryModel"], function($, Backbone, CategoryModel) {
 
 	// Extends Backbone.Router
-	var Collection = Backbone.Collection.extend({
+	var CategoryCollection = Backbone.Collection.extend({
 		model: CategoryModel,
 
 		initialize: function(model, options) {
@@ -13,11 +13,11 @@ define(["jquery", "backbone", "models/SchemaModel"], function($, Backbone, Categ
 		},
 
 		url: function() {
-			var url = 'mobile/categories/'
+			var url = rootUrl + 'mobile/categories/'
 			return url;
 		}
 	});
 	// Returns the Model class
-	return Collection;
+	return CategoryCollection;
 
 });

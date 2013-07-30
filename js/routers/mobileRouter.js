@@ -22,7 +22,7 @@ define(["jquery", "backbone", "../views/LoginView", "../views/ReportView","../vi
             this.detailsView = new DetailsView({
                 el: "#details"
             });
-
+            
             Backbone.history.start();
         },
 
@@ -39,7 +39,10 @@ define(["jquery", "backbone", "../views/LoginView", "../views/ReportView","../vi
 
         // HOME OR LOGIN
         home: function() {
-            // launch or auth
+            $.mobile.changePage("#home", {
+                reverse: false,
+                changeHash: false
+            });
         },
 
         // Select env
