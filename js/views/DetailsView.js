@@ -2,13 +2,20 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone"], function($, Backbone) {
+define(["jquery", "backbone", "photoswipe"], function($, Backbone, PhotoSwipe) {
 
     // Extends Backbone.View
     var DetailsView = Backbone.View.extend({
+
         events: {
             'click .back': window.history.back,
             'click .back': 'goBack'
+        },
+
+        initialize: function() {
+            _.bindAll(this, "goBack", "render");
+            var that = this;
+            this.render();
         },
 
         goBack: function(evt) {
@@ -17,14 +24,8 @@ define(["jquery", "backbone"], function($, Backbone) {
             window.history.back();
         },
 
-        initialize: function() {
-            //console.log("init login view")
-            _.bindAll(this, "goBack");
-            var that = this;
-            this.render();
-        },
-
         render: function() {
+            var photoSwipeInstance = $("#gallery1 a").photoSwipe({enableMouseWheel:false, enableKeyboard:false});
             this.delegateEvents();
             return this;
         }

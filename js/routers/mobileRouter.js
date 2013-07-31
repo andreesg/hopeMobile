@@ -2,25 +2,29 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone", "../views/LoginView", "../views/ReportView","../views/DetailsView", "../models/CategoryModel", "../collections/CategoryCollection", "async!http://maps.google.com/maps/api/js?sensor=false"], function($, Backbone, LoginView, ReportView, DetailsView, CategoryModel, CategoryCollection, google) {
+define(["jquery", "backbone", "photoswipe", "../views/LoginView", "../views/ReportView","../views/DetailsView", "../models/CategoryModel", "../collections/CategoryCollection", "../collections/OccurrenceCollection", "async!http://maps.google.com/maps/api/js?sensor=false"], function($, Backbone, PhotoSwipe, LoginView, ReportView, DetailsView, CategoryModel, CategoryCollection, OccurrenceCollection, google) {
 
     // Extends Backbone.Router
     var CategoryRouter = Backbone.Router.extend({
 
         // The Router constructor
         initialize: function() {
-            this.mapOcurrences = null;
+            this.categoryList = new CategoryCollection(null, {
+                scope: 1
+            });
+
+            this.occurrenceList = new OccurrenceCollection(null, {
+                scope: 1
+            });
 
             this.loginView = new LoginView({
-                el: "#logincontent"
+                el: "#logincontent",
+                app: this
             });
 
             this.reportView = new ReportView({
-                el: "#home"
-            });
-
-            this.detailsView = new DetailsView({
-                el: "#details"
+                el: "#home",
+                app: this
             });
 
             Backbone.history.start();
@@ -50,10 +54,21 @@ define(["jquery", "backbone", "../views/LoginView", "../views/ReportView","../vi
         },
 
         details: function(id) {
-            $.mobile.changePage("#details", {
-                reverse: false,
-                changeHash: false
-            });
+            var model = this.occurrenceList.get(id);
+            if (model != undefined) {
+                this.detailsView = new DetailsView({
+                    el: "#details",
+                    model: model,
+                    app: this
+                });
+
+                $.mobile.changePage("#details", {
+                    reverse: false,
+                    changeHash: false
+                });
+            } else {
+                alert("Something went wrong.");
+            }
         }
 
 

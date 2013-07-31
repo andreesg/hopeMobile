@@ -13,7 +13,8 @@ require.config({
             "gmap": "libs/jquery.ui.map",
             "jqueryui": "libs/jquery.ui.map.extensions",
             "async": "libs/async",
-            "goog": "libs/goog"
+            "goog": "libs/goog",
+            "photoswipe": "libs/photoswipe"
       },
 
       // Sets the configuration for your third party scripts that are not AMD compatible

@@ -7,14 +7,6 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
     // Extends Backbone.View
     var ReportView = Backbone.View.extend({
 
-        categoryList: new CategoryCollection(null, {
-            scope: 1
-        }),
-
-        occurrenceList: new OccurrenceCollection(null, {
-            scope: 1
-        }),
-
         events: {
             'change #categorieslist':'categoryChanged',
             'click #takepicture': 'takePicture',
@@ -29,6 +21,8 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
             this.arrayMarkers = [];
             _.bindAll(this, "categoryChanged","takePicture","selectPicture","saveReport","getLocation", "renderCategories", "renderOccurrences", "goBack");
             var that = this;
+
+            this.app = this.options.app;
             this.render();
         },
 
@@ -43,12 +37,43 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
             $("#titleinput").show();
         },
 
-        takePicture: function() {
+        takePicture: function(evt) {
             console.log("[ReportView] Take picture.");
+            navigator.camera.getPicture(function(fileURI) {
+                $("#camera_image").attr("src", fileURI);
+                $("#camera_image").show();
+            }, function(message) {
+                setTimeout(function() {
+                    alert(message)
+                }, 100);
+            }, {
+                quality: 100,
+                destinationType: navigator.camera.DestinationType.FILE_URI,
+                sourceType: navigator.camera.PictureSourceType.CAMERA,
+                encodingType: navigator.camera.EncodingType.JPEG,
+            });
+
+            evt.preventDefault();
         },
 
-        selectPicture: function() {
+        selectPicture: function(evt) {
             console.log("[ReportView] Select picture.");
+            navigator.camera.getPicture(function(fileURI) {
+                $("#camera_image").attr("src", fileURI);
+                $("#camera_image").show();
+            }, function(message) {
+                setTimeout(function() {
+                    alert(message)
+                }, 100);
+            }, {
+                quality: 100,
+                destinationType: navigator.camera.DestinationType.FILE_URI,
+                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+                encodingType: navigator.camera.EncodingType.JPEG,
+            });
+
+            evt.preventDefault();
+
         },
 
         saveReport: function() {
@@ -74,7 +99,7 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
                 coords: latlng
             });
 
-            new_occurr.save({
+            new_occurr.save(null, {
                 success: function(model, response, options) {
                     console.log("success");
                     console.log(model);
@@ -85,7 +110,8 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
                     console.log("error");
                     console.log(model);
                     console.log(response);
-                    console.log(options);                }
+                    console.log(options);                
+                }
             });
 
         },
@@ -158,10 +184,10 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
             
             this.loadMap(40.208696, -8.425400);
 
-            this.categoryList.on('reset', this.renderCategories, this);
-            this.occurrenceList.on('reset', this.renderOccurrences, this);
-            this.categoryList.fetch();
-            this.occurrenceList.fetch();
+            this.app.categoryList.on('reset', this.renderCategories, this);
+            this.app.occurrenceList.on('reset', this.renderOccurrences, this);
+            this.app.categoryList.fetch();
+            this.app.occurrenceList.fetch();
 
             this.delegateEvents();
             return this;
