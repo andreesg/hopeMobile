@@ -40,7 +40,7 @@
 </head>
 <body>
 
-  <div id="login" data-role="page" data-title="Hope">
+  <!--<div id="login" data-role="page" data-title="Hope">
     <div data-role="header">
       <h1>Hope</h1>
     </div>
@@ -53,15 +53,22 @@
       </form>
 
     </div>
-  </div>
+  </div>-->
 
   <div id="home" data-role="page" data-title="Hope" class="page-map" data-id="myfooter">
 
     <div data-role="panel" id="mypanel" data-display="overlay" data-theme="a" data-id="myfooter"> 
-      <div id="categorieslist">
+      <div>
+        <select name="categorieslist" id="categorieslist" style="display:none;" data-theme="b">
+
+        </select>
       </div>
       
-      <div id="catdetails">
+      <div id="titleinput" style="display:none;">
+        <input type="text" name="Report Title" id="report_title" placeholder="title" data-theme="c">
+        <!--<label for="slider-fill" style="color:#ffffff;">Importance:</label>
+        <input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="100" step="5" data-highlight="true" data-theme="c">-->
+        <p>
       </div>
 
       <button id="takepicture" data-theme="b">Take Picture</button>
@@ -76,7 +83,7 @@
     <div id="location_map"></div>
 
     <div id="myfooter" data-role="footer" data-position="fixed">
-      <h1><a href="#mypanel" style="text-decoration:none;color:#ffffff;">Report</a></h1><a id="getlocation" data-icon="forward" data-role="button" class="ui-btn-right">refresh</a>
+      <a data-icon="back" data-role="button" class="back ui-btn-left">&nbsp;&nbsp;&nbsp;</a><h1><a href="#mypanel" style="text-decoration:none;color:#ffffff;">Report</a></h1><a id="getlocation" data-icon="refresh" data-role="button" class="ui-btn-right">refresh</a>
     </div>
 
   </div>
@@ -87,7 +94,7 @@
       <img id="details_image" src="" style="width:100%;" hidden="hidden"/>
     </div>
     <div id="detailsfooter" data-role="footer" data-position="fixed">
-      <h1><a href="#" id="#reinforcebtn" style="text-decoration:none;">Reinforce</a></h1><a href="#" id="details_newphoto" data-icon="alert" data-role="button" class="ui-btn-right">add photo</a>
+      <a data-icon="back" data-role="button" class="back ui-btn-left">&nbsp;&nbsp;&nbsp;</a><h1><a href="#" id="#reinforcebtn" style="text-decoration:none;color:#ffffff;">Reinforce</a></h1><a id="details_newphoto" data-icon="alert" data-role="button" class="ui-btn-right">add photo</a>
     </div>
 
   </div>

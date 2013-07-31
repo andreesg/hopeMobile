@@ -22,7 +22,7 @@ define(["jquery", "backbone", "../views/LoginView", "../views/ReportView","../vi
             this.detailsView = new DetailsView({
                 el: "#details"
             });
-            
+
             Backbone.history.start();
         },
 
@@ -31,10 +31,6 @@ define(["jquery", "backbone", "../views/LoginView", "../views/ReportView","../vi
             "": "home",
             "hope?:type": "env",
             "details?:id": "details"
-        },
-
-        events: {
-            'click .back': window.history.back
         },
 
         // HOME OR LOGIN
