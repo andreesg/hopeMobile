@@ -109,14 +109,10 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
                     $("#report_title").val('');
                     $("#titleinput").hide();
 
-                    console.log("model:");
-                    console.log(model);
-                    console.log("response:");
-                    console.log(response);
-                    console.log("options:");
-                    console.log(options);
+                    result = response.result;
+                    occurr_id = result['id'];
 
-                    that.transferFile();  
+                    that.transferFile(occurr_id);  
 
                 },
                 error: function(model, response, options) {
@@ -128,7 +124,7 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
             });
         },
 
-        transferFile: function() {
+        transferFile: function(occurr_id) {
             var options = new FileUploadOptions();
             options.fileKey = "file";
             options.fileName = "Upload image";
@@ -142,7 +138,7 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
 
             var ft = new FileTransfer();
             $.mobile.loading("show");
-            ft.upload($("#camera_image").attr("src"), rootUrl + "occurrences/upload/" + model.get('id') + "/", function() {
+            ft.upload($("#camera_image").attr("src"), rootUrl + "occurrences/upload/" + occurr_id + "/", function() {
                 alert("Upload successfully");
                 $.mobile.loading("hide");
                 $("#camera_image").hide();
@@ -150,7 +146,7 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
                 alert("Upload Failed!");
                 console.log(error);
             }, options);
-            
+
         },
 
         getLocation: function() {

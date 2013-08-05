@@ -2,20 +2,25 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone", "photoswipe"], function($, Backbone, PhotoSwipe) {
+define(["jquery", "backbone", "photoswipe", "../collections/PhotoCollection"], function($, Backbone, PhotoSwipe, PhotoCollection) {
 
     // Extends Backbone.View
     var DetailsView = Backbone.View.extend({
 
         events: {
             'click .back': 'goBack',
-            'click #reinforcebtn', 'vote',
-            'click #details_newphoto', 'addPhoto'
+            'click #reinforcebtn': 'vote',
+            'click #details_newphoto': 'addPhoto'
         },
 
         initialize: function() {
             _.bindAll(this, "goBack", "render", "addPhoto", "vote");
             var that = this;
+
+            this.photoList = new PhotoCollection(null, {
+                occurr_id: that.model.get('id') 
+            });
+
             this.render();
         },
 
@@ -49,8 +54,16 @@ define(["jquery", "backbone", "photoswipe"], function($, Backbone, PhotoSwipe) {
             evt.preventDefault();
         },
 
-        render: function() {
+        renderPhotos: function(collection, response) {
+            console.log("[DetailsView] Render Photos.");
+            console.log(collection);
             var photoSwipeInstance = $("#gallery1 a").photoSwipe({enableMouseWheel:false, enableKeyboard:false});
+        },
+
+        render: function() {
+            this.photoList.on('reset', this.renderPhotos, this);
+            this.photoList.fetch();
+
             this.delegateEvents();
             return this;
         }
