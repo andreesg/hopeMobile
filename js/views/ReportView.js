@@ -19,7 +19,7 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
         initialize: function() {
             console.log("[ReportView] Init.");
             this.arrayMarkers = [];
-            _.bindAll(this, "categoryChanged","takePicture","selectPicture","saveReport","getLocation", "renderCategories", "renderOccurrences", "goBack");
+            _.bindAll(this, "categoryChanged","takePicture","selectPicture","saveReport","getLocation", "renderCategories", "renderOccurrences", "goBack", "transferFile");
             var that = this;
 
             this.app = this.options.app;
@@ -78,6 +78,9 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
 
         saveReport: function() {
             console.log("[ReportView] Save Report.");
+
+            var that = this;
+
             var lat = $("#_latfield").val();
             var lng = $("#_lngfield").val();
 
@@ -102,18 +105,52 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
             new_occurr.save(null, {
                 success: function(model, response, options) {
                     console.log("success");
+                    alert("Saved Successfully.");
+                    $("#report_title").val('');
+                    $("#titleinput").hide();
+
+                    console.log("model:");
                     console.log(model);
+                    console.log("response:");
                     console.log(response);
+                    console.log("options:");
                     console.log(options);
+
+                    that.transferFile();  
+
                 },
                 error: function(model, response, options) {
                     console.log("error");
                     console.log(model);
                     console.log(response);
-                    console.log(options);                
+                    console.log(options);
                 }
             });
+        },
 
+        transferFile: function() {
+            var options = new FileUploadOptions();
+            options.fileKey = "file";
+            options.fileName = "Upload image";
+            //options.mimeType = "multipart/form-data"
+            options.chunkedMode = false; // nginx server
+
+            var params = new Object();
+            params.latitude = $('#_latfield').val();
+            params.longitude = $('#_lngfield').val();
+            options.params = params;
+
+            var ft = new FileTransfer();
+            $.mobile.loading("show");
+            ft.upload($("#camera_image").attr("src"), rootUrl + "occurrences/upload/" + model.get('id') + "/", function() {
+                alert("Upload successfully");
+                $.mobile.loading("hide");
+                $("#camera_image").hide();
+            }, function(error) {
+                alert("Upload Failed!");
+                console.log(error);
+            }, options);
+            
         },
 
         getLocation: function() {
@@ -126,6 +163,8 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
                 var clientPosition = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                 $("#_latfield").val(position.coords.latitude);
                 $("#_lngfield").val(position.coords.longitude);
+                console.log("position:");
+                console.log(clientPosition);
                 $(that.map).gmap('addMarker', {
                     'position': clientPosition,
                     'bounds': true,
@@ -136,6 +175,8 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
                 });*/
                 $.mobile.loading("hide");
             }, function(error) {
+                console.log("error:");
+                console.log(error);
                 $.mobile.loading("hide");
             });
         },

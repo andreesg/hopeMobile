@@ -8,12 +8,13 @@ define(["jquery", "backbone", "photoswipe"], function($, Backbone, PhotoSwipe) {
     var DetailsView = Backbone.View.extend({
 
         events: {
-            'click .back': window.history.back,
-            'click .back': 'goBack'
+            'click .back': 'goBack',
+            'click #reinforcebtn', 'vote',
+            'click #details_newphoto', 'addPhoto'
         },
 
         initialize: function() {
-            _.bindAll(this, "goBack", "render");
+            _.bindAll(this, "goBack", "render", "addPhoto", "vote");
             var that = this;
             this.render();
         },
@@ -22,6 +23,30 @@ define(["jquery", "backbone", "photoswipe"], function($, Backbone, PhotoSwipe) {
             console.log("[ReportView] go back.");
             console.log(evt);
             window.history.back();
+        },
+
+        vote: function(evt) {
+            console.log("[DetailsView] Vote");
+        },
+
+        addPhoto: function(evt) {
+            console.log("[DetailsView] add photo.");
+            navigator.camera.getPicture(function(fileURI) {
+                /*$("#camera_image").attr("src", fileURI);
+                $("#camera_image").show();*/
+                // TODO
+            }, function(message) {
+                setTimeout(function() {
+                    alert(message)
+                }, 100);
+            }, {
+                quality: 100,
+                destinationType: navigator.camera.DestinationType.FILE_URI,
+                sourceType: navigator.camera.PictureSourceType.CAMERA,
+                encodingType: navigator.camera.EncodingType.JPEG,
+            });
+
+            evt.preventDefault();
         },
 
         render: function() {
