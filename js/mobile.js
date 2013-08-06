@@ -14,7 +14,8 @@ require.config({
             "jqueryui": "libs/jquery.ui.map.extensions",
             "async": "libs/async",
             "goog": "libs/goog",
-            "photoswipe": "libs/photoswipe"
+            "photoswipe": "libs/photoswipe",
+            "fastclick": "libs/fastclick"
       },
 
       // Sets the configuration for your third party scripts that are not AMD compatible
@@ -29,24 +30,32 @@ require.config({
 });
 
 // Includes File Dependencies
-require(["jquery", "backbone", "cordova", "routers/mobileRouter"], function($, Backbone, Cordova, MobileRouter) {
+require(["jquery", "backbone", "cordova","fastclick", "routers/mobileRouter"], function($, Backbone, Cordova, FastClick, MobileRouter) {
 
       $(document).on("mobileinit",
       // Set up the "mobileinit" handler before requiring jQuery Mobile's module
 
       function() {
+            $.mobile.ajaxEnabled = false;
             // Prevents all anchor click handling including the addition of active button state and alternate link bluring.
             $.mobile.linkBindingEnabled = false;
+            $.mobile.listview.prototype.options.icon = "";
 
             // Disabling this will prevent jQuery Mobile from handling hash changes
             $.mobile.hashListeningEnabled = false;
 
             // set default page transition to slide
             $.mobile.defaultPageTransition = "slide";
+            $.mobile.pushStateEnabled = false;
+            $.mobile.buttonMarkup.hoverDelay = 0;
+
 
       });
 
-      require(["jquerymobile", "gmap"], function() {
+      require(["jquerymobile", "gmap", "fastclick"], function() {
+            $(function() {
+                  FastClick.attach(document.body);
+            });
             app = new MobileRouter();
       });
 

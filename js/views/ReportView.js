@@ -47,7 +47,7 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
                     alert(message)
                 }, 100);
             }, {
-                quality: 100,
+                quality: 25,
                 destinationType: navigator.camera.DestinationType.FILE_URI,
                 sourceType: navigator.camera.PictureSourceType.CAMERA,
                 encodingType: navigator.camera.EncodingType.JPEG
@@ -66,10 +66,12 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
                     alert(message)
                 }, 100);
             }, {
-                quality: 100,
+                quality: 35,
                 destinationType: navigator.camera.DestinationType.FILE_URI,
                 sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-                encodingType: navigator.camera.EncodingType.JPEG
+                encodingType: navigator.camera.EncodingType.JPEG,
+                targetWidth: 480,
+                targetWidth: 640
             });
 
             evt.preventDefault();
@@ -105,7 +107,7 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             new_occurr.save(null, {
                 success: function(model, response, options) {
                     console.log("success");
-                    alert("Saved Successfully.");
+                    //alert("Saved Successfully.");
                     $("#report_title").val('');
                     $("#titleinput").hide();
 
@@ -127,7 +129,7 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
         transferFile: function(occurr_id) {
             var options = new FileUploadOptions();
             options.fileKey = "file";
-            options.fileName = "Upload image";
+            options.fileName = "new_image.jpg";
             //options.mimeType = "multipart/form-data"
             options.chunkedMode = false; // nginx server
 
@@ -139,12 +141,13 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             var ft = new FileTransfer();
             $.mobile.loading("show");
             ft.upload($("#camera_image").attr("src"), rootUrl + "occurrences/upload/" + occurr_id + "/", function(response) {
-                alert(JSON.stringify(response));
+                alert("Saved Successfully!");
                 $.mobile.loading("hide");
                 $("#camera_image").hide();
             }, function(error) {
-                alert(JSON.stringify(error));
+                alert("Something went wrong.");
                 console.log(error);
+                $.mobile.loading("hide");
             }, options);
 
         },

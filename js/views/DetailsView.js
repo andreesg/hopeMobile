@@ -62,7 +62,7 @@ define(["jquery", "backbone", "cordova", "photoswipe", "../collections/PhotoColl
             console.log("[DetailsView] Transfer file!");
             var options = new FileUploadOptions();
             options.fileKey = "file";
-            options.fileName = "Upload image";
+            options.fileName = "new_img.jpg";
             //options.mimeType = "multipart/form-data"
             options.chunkedMode = false; // nginx server
 
@@ -76,9 +76,9 @@ define(["jquery", "backbone", "cordova", "photoswipe", "../collections/PhotoColl
             ft.upload(url, rootUrl + "occurrences/upload/" + occurr_id + "/", function() {
                 alert("Upload successfully!");
                 $.mobile.loading("hide");
-                $("#camera_image").hide();
             }, function(error) {
                 alert("Upload Failed!");
+                $.mobile.loading("hide");
                 console.log(error);
             }, options);
 
@@ -96,7 +96,7 @@ define(["jquery", "backbone", "cordova", "photoswipe", "../collections/PhotoColl
                     alert(message)
                 }, 100);
             }, {
-                quality: 100,
+                quality: 25,
                 destinationType: navigator.camera.DestinationType.FILE_URI,
                 sourceType: navigator.camera.PictureSourceType.CAMERA,
                 encodingType: navigator.camera.EncodingType.JPEG
