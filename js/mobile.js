@@ -29,7 +29,7 @@ require.config({
 });
 
 // Includes File Dependencies
-require(["jquery", "backbone", "routers/mobileRouter"], function($, Backbone, MobileRouter) {
+require(["jquery", "backbone", "cordova", "routers/mobileRouter"], function($, Backbone, Cordova, MobileRouter) {
 
       $(document).on("mobileinit",
       // Set up the "mobileinit" handler before requiring jQuery Mobile's module

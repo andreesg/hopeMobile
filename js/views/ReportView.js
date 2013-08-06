@@ -2,7 +2,7 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone", "../collections/CategoryCollection", "../collections/OccurrenceCollection", "../models/OcurrenceModel"], function($, Backbone, CategoryCollection, OccurrenceCollection, OcurrenceModel) {
+define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", "../collections/OccurrenceCollection", "../models/OcurrenceModel"], function($, Backbone, Cordova, CategoryCollection, OccurrenceCollection, OcurrenceModel) {
 
     // Extends Backbone.View
     var ReportView = Backbone.View.extend({
@@ -50,7 +50,7 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
                 quality: 100,
                 destinationType: navigator.camera.DestinationType.FILE_URI,
                 sourceType: navigator.camera.PictureSourceType.CAMERA,
-                encodingType: navigator.camera.EncodingType.JPEG,
+                encodingType: navigator.camera.EncodingType.JPEG
             });
 
             evt.preventDefault();
@@ -69,7 +69,7 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
                 quality: 100,
                 destinationType: navigator.camera.DestinationType.FILE_URI,
                 sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-                encodingType: navigator.camera.EncodingType.JPEG,
+                encodingType: navigator.camera.EncodingType.JPEG
             });
 
             evt.preventDefault();
@@ -138,12 +138,12 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
 
             var ft = new FileTransfer();
             $.mobile.loading("show");
-            ft.upload($("#camera_image").attr("src"), rootUrl + "occurrences/upload/" + occurr_id + "/", function() {
-                alert("Upload successfully");
+            ft.upload($("#camera_image").attr("src"), rootUrl + "occurrences/upload/" + occurr_id + "/", function(response) {
+                alert(JSON.stringify(response));
                 $.mobile.loading("hide");
                 $("#camera_image").hide();
             }, function(error) {
-                alert("Upload Failed!");
+                alert(JSON.stringify(error));
                 console.log(error);
             }, options);
 
@@ -171,9 +171,9 @@ define(["jquery", "backbone", "../collections/CategoryCollection", "../collectio
                 });*/
                 $.mobile.loading("hide");
             }, function(error) {
-                console.log("error:");
-                console.log(error);
-                $.mobile.loading("hide");
+                setTimeout(function() {
+                    alert(error);
+                }, 100);
             });
         },
 

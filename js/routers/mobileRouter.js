@@ -2,7 +2,7 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone", "photoswipe", "../views/LoginView", "../views/ReportView","../views/DetailsView", "../models/CategoryModel", "../collections/CategoryCollection", "../collections/OccurrenceCollection", "async!http://maps.google.com/maps/api/js?sensor=false"], function($, Backbone, PhotoSwipe, LoginView, ReportView, DetailsView, CategoryModel, CategoryCollection, OccurrenceCollection, google) {
+define(["jquery", "backbone","cordova", "photoswipe", "../views/LoginView", "../views/ReportView","../views/DetailsView", "../models/CategoryModel", "../collections/CategoryCollection", "../collections/OccurrenceCollection", "async!http://maps.google.com/maps/api/js?sensor=false"], function($, Backbone, Cordova, PhotoSwipe, LoginView, ReportView, DetailsView, CategoryModel, CategoryCollection, OccurrenceCollection, google) {
 
     // Extends Backbone.Router
     var CategoryRouter = Backbone.Router.extend({
@@ -26,6 +26,8 @@ define(["jquery", "backbone", "photoswipe", "../views/LoginView", "../views/Repo
                 el: "#home",
                 app: this
             });
+
+            this.detailsView = null;
 
             Backbone.history.start();
         },
@@ -56,6 +58,11 @@ define(["jquery", "backbone", "photoswipe", "../views/LoginView", "../views/Repo
         details: function(id) {
             var model = this.occurrenceList.get(id);
             if (model != undefined) {
+                
+                // MADNESS. NEED FIX
+                if (this.detailsView != null)
+                    this.detailsView.destroy_view();
+
                 this.detailsView = new DetailsView({
                     el: "#details",
                     model: model,
