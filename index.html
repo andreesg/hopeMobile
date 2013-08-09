@@ -34,7 +34,7 @@
   .gallery li a { display: block; margin: 5px; border: 1px solid #3c3c3c; }
   .gallery li img { display: block; width: 100%; height: auto; }
 
-  div[data-role="page"], div[data-role="panel"], div[data-role="footer"] {
+  div[data-role="page"], div[data-role="panel"] {
     transform: translate3d(0,0,0);
   }
 
@@ -50,7 +50,7 @@
 </head>
 <body>
 
-  <!--<div id="login" data-role="page" data-title="Hope">
+  <div id="login" data-role="page" data-title="Hope">
     <div data-role="header">
       <h1>Hope</h1>
     </div>
@@ -63,11 +63,11 @@
       </form>
 
     </div>
-  </div>-->
+  </div>
 
-  <div id="home" data-role="page" data-title="Hope" class="page-map" data-id="myfooter">
+  <div id="home" data-role="page" data-title="Hope" class="page-map needsclick" data-id="myfooter">
 
-    <div data-role="panel" id="mypanel" data-display="overlay" data-theme="a" data-id="myfooter"> 
+    <div data-role="panel" id="mypanel" data-display="overlay" data-theme="a"> 
       <div>
         <select name="categorieslist" id="categorieslist" style="display:none;" data-theme="b">
 
@@ -86,14 +86,14 @@
       <button id="savebtn" data-theme="c">Save Report</button>
       <input type="hidden" name="lat" id="_latfield" placeholder="lat">
       <input type="hidden" name="lat" id="_lngfield" placeholder="lng">
-      <img id="camera_image" src="images/005.jpg" style="width:100%;" hidden="hidden"/>
+      <img id="camera_image" src="" style="display:none;"/>
 
     </div>
     
-    <div id="location_map"></div>
+    <div id="location_map" class="needsclick"></div>
 
     <div id="myfooter" data-role="footer" data-position="fixed" data-tap-toggle="false">
-      <a data-icon="back" data-role="button" class="back ui-btn-left">&nbsp;&nbsp;&nbsp;</a><h1><a href="#mypanel" style="text-decoration:none;color:#ffffff;">Report</a></h1><a id="getlocation" data-icon="refresh" data-role="button" class="ui-btn-right">refresh</a>
+      <h1><a href="#mypanel" style="text-decoration:none;color:#ffffff;">Report</a></h1><a id="getlocation" data-icon="refresh" data-role="button" class="ui-btn-right">location</a>
     </div>
 
   </div>

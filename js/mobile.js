@@ -53,9 +53,9 @@ require(["jquery", "backbone", "cordova","fastclick", "routers/mobileRouter"], f
       });
 
       require(["jquerymobile", "gmap", "fastclick"], function() {
-            $(function() {
+            /*$(function() {
                   FastClick.attach(document.body);
-            });
+            });*/
             app = new MobileRouter();
       });
 

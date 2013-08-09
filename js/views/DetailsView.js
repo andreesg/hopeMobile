@@ -35,7 +35,10 @@ define(["jquery", "backbone", "cordova", "photoswipe", "../collections/PhotoColl
         goBack: function(evt) {
             console.log("[ReportView] go back.");
             console.log(evt);
-            window.history.back();
+            $.mobile.changePage("#home", {
+                reverse: true,
+                changeHash: true
+            });
         },
 
         vote: function(evt) {

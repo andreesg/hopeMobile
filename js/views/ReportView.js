@@ -23,13 +23,12 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             var that = this;
 
             this.app = this.options.app;
-            this.render();
+            //this.render();
         },
 
         goBack: function(evt) {
             console.log("[ReportView] go back.");
             console.log(evt);
-            window.history.back();
         },
 
         categoryChanged: function() {
@@ -41,7 +40,7 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             console.log("[ReportView] Take picture.");
             navigator.camera.getPicture(function(fileURI) {
                 $("#camera_image").attr("src", fileURI);
-                $("#camera_image").show();
+                
             }, function(message) {
                 setTimeout(function() {
                     alert(message)
@@ -60,7 +59,7 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             console.log("[ReportView] Select picture.");
             navigator.camera.getPicture(function(fileURI) {
                 $("#camera_image").attr("src", fileURI);
-                $("#camera_image").show();
+                
             }, function(message) {
                 setTimeout(function() {
                     alert(message)
@@ -83,6 +82,9 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
 
             var that = this;
 
+            that.user = window.localStorage.getItem("user");
+            that.token = window.localStorage.getItem("auth_token");
+
             var lat = $("#_latfield").val();
             var lng = $("#_lngfield").val();
 
@@ -101,12 +103,14 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
                 id: 0,
                 category_id: cat_id,
                 title: title,
-                coords: latlng
+                coords: latlng,
+                user: that.user,
+                token: that.token
             });
 
             new_occurr.save(null, {
                 success: function(model, response, options) {
-                    console.log("success");
+                    console.log("[ReportView] occurrence saved.");
                     //alert("Saved Successfully.");
                     $("#report_title").val('');
                     $("#titleinput").hide();
@@ -114,7 +118,11 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
                     result = response.result;
                     occurr_id = result['id'];
 
-                    that.transferFile(occurr_id);  
+                    if ($("#camera_image").attr("src") != "") {
+                        that.transferFile(occurr_id);
+                    } else {
+                        alert("Occurrence reported!");
+                    }
 
                 },
                 error: function(model, response, options) {
@@ -143,7 +151,6 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             ft.upload($("#camera_image").attr("src"), rootUrl + "occurrences/upload/" + occurr_id + "/", function(response) {
                 alert("Saved Successfully!");
                 $.mobile.loading("hide");
-                $("#camera_image").hide();
             }, function(error) {
                 alert("Something went wrong.");
                 console.log(error);

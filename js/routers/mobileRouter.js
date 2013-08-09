@@ -28,8 +28,11 @@ define(["jquery", "backbone","cordova", "photoswipe", "../views/LoginView", "../
             });
 
             this.detailsView = null;
+            this.user = null;
+            this.token = null;
 
             Backbone.history.start();
+            this.launchAppOrAuth();
         },
 
         // Backbone.js Routes
@@ -39,9 +42,50 @@ define(["jquery", "backbone","cordova", "photoswipe", "../views/LoginView", "../
             "details?:id": "details"
         },
 
+        launchAppOrAuth: function() {
+            var that = this;
+
+            if (window.localStorage.getItem("user") != null) {
+                var _user = window.localStorage.getItem("user");
+                var _token = window.localStorage.getItem("auth_token");
+
+                that.token = _token;
+                that.user = _user;
+
+                $.ajax({
+                    'type': 'GET',
+                    'url': domain + "token/" + that.token + "/" + that.user + ".json",
+                    success: function(data) {
+                        if (data.success) {
+                            console.log(data);
+                            that.launchApp();
+                        } else {
+                            that.env("login");
+                        }
+                        return false;
+                    },
+                    error: function(xhr, type) {
+                        that.env("login");
+                    }
+                });
+            } else {
+                this.env("login");
+            }
+        },
+
+        launchApp: function() {
+
+            this.reportView.render();
+
+            $.mobile.changePage("#home", {
+                reverse: false,
+                changeHash: false
+            });        
+        },
+
         // HOME OR LOGIN
         home: function() {
-            $.mobile.changePage("#home", {
+            $.mobile.changePage("#login", {
                 reverse: false,
                 changeHash: false
             });
