@@ -40,7 +40,7 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             console.log("[ReportView] Take picture.");
             navigator.camera.getPicture(function(fileURI) {
                 $("#camera_image").attr("src", fileURI);
-                
+                $("#camera_image").show();
             }, function(message) {
                 setTimeout(function() {
                     alert(message)
@@ -59,7 +59,7 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             console.log("[ReportView] Select picture.");
             navigator.camera.getPicture(function(fileURI) {
                 $("#camera_image").attr("src", fileURI);
-                
+                $("#camera_image").show();
             }, function(message) {
                 setTimeout(function() {
                     alert(message)
@@ -150,6 +150,7 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             $.mobile.loading("show");
             ft.upload($("#camera_image").attr("src"), rootUrl + "occurrences/upload/" + occurr_id + "/", function(response) {
                 alert("Saved Successfully!");
+                $("#camera_image").hide();
                 $.mobile.loading("hide");
             }, function(error) {
                 alert("Something went wrong.");
