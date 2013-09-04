@@ -10,11 +10,12 @@ define(["jquery", "backbone", "cordova", "photoswipe", "../collections/PhotoColl
         events: {
             'click .back': 'goBack',
             'click #reinforcebtn': 'vote',
+            'click #followbtn': 'followReport',
             'click #details_newphoto': 'addPhoto'
         },
 
         initialize: function() {
-            _.bindAll(this, "goBack", "render", "addPhoto", "vote", "transferFile", "destroy_view");
+            _.bindAll(this, "goBack", "render", "addPhoto", "vote", "transferFile", "destroy_view", "followReport");
             var that = this;
             //console.log(that.model.id);
             this.photoList = new PhotoCollection(null, {
@@ -25,6 +26,8 @@ define(["jquery", "backbone", "cordova", "photoswipe", "../collections/PhotoColl
             console.log(that.model);
             console.log(that.model.get('schema'));
             */
+
+            this.followed = false;
 
             this.render();
         },
@@ -64,6 +67,16 @@ define(["jquery", "backbone", "cordova", "photoswipe", "../collections/PhotoColl
                     console.log(options);
                 }
             });
+        },
+
+        followReport: function(evt) {
+            if (this.followed == false) {
+                $("#followbtn").html("Unfollow");
+                this.followed = true;
+            } else {
+                $("#followbtn").html("Follow");
+                this.followed = false;
+            }
         },
 
         transferFile: function(occurr_id, url) {
