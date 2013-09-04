@@ -83,6 +83,19 @@ define(["jquery", "backbone","cordova", "photoswipe", "../views/LoginView", "../
             });        
         },
 
+        logout: function() {
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("auth_token", null);
+            this.user = null;
+            this.token = null;
+
+            $.mobile.changePage("#login", {
+                reverse: true,
+                changeHash: true
+            });
+
+        },
+
         // HOME OR LOGIN
         home: function() {
             $.mobile.changePage("#login", {

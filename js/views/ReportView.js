@@ -13,7 +13,8 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             'click #selectpicture': 'selectPicture',
             'click #savebtn': 'saveReport',
             'click #getlocation': 'getLocation',
-            'click .back': 'goBack'
+            'click .back': 'goBack',
+            'click #logoutbtn': 'logout'
         },
 
         initialize: function() {
@@ -24,6 +25,10 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
 
             this.app = this.options.app;
             //this.render();
+        },
+
+        logout: function(evt) {
+            this.app.logout();
         },
 
         goBack: function(evt) {
@@ -208,7 +213,7 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             collection.each(function(model) {
                 template += "<option value='"+model.get("name")+"' id='"+model.get("id")+"'>"+model.get("name")+"</option>";
             });
-            $("#categorieslist").html(template);
+            $("#categorieslist").append(template);
             $("#categorieslist").show();
         },
 

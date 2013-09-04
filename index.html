@@ -22,6 +22,12 @@
     border-width: 0px;
   }
 
+
+
+  #report_details {
+    margin:10px;
+  }
+
   #location_map {
     height: 100%;
     width: 100%;
@@ -70,7 +76,7 @@
     <div data-role="panel" id="mypanel" data-display="overlay" data-theme="a"> 
       <div>
         <select name="categorieslist" id="categorieslist" style="display:none;" data-theme="b">
-
+          <option>Select a category:</option>
         </select>
       </div>
       
@@ -81,45 +87,50 @@
         <p>
       </div>
 
-      <button id="takepicture" data-theme="b">Take Picture</button>
-      <button id="selectpicture" data-theme="b">Select Picture</button>
-      <button id="savebtn" data-theme="c">Save Report</button>
+      <button id="takepicture" data-theme="b" data-icon="flat-camera">Take Picture</button>
+      <button id="selectpicture" data-theme="b" data-icon="flat-plus">Select Picture</button>
+      <button id="savebtn" data-theme="g" data-icon="flat-new">Save Report</button>
       <input type="hidden" name="lat" id="_latfield" placeholder="lat">
       <input type="hidden" name="lat" id="_lngfield" placeholder="lng">
       <img id="camera_image" src="" style="display:none;"/>
 
     </div>
     
-    <div id="location_map" class="needsclick"></div>
+    <div id="location_map"></div>
 
     <div id="myfooter" data-role="footer" data-position="fixed" data-tap-toggle="false">
-      <h1><a href="#mypanel" style="text-decoration:none;color:#ffffff;">Report</a></h1><a id="getlocation" data-icon="refresh" data-role="button" class="ui-btn-right">location</a>
+      <a data-icon="flat-cross" data-role="button" class="back ui-btn-left" id="logoutbtn">logout</a><h1><a href="#mypanel" style="text-decoration:none;color:#ffffff;">Report</a></h1><a id="getlocation" data-icon="flat-location" data-role="button" class="ui-btn-right">my location</a>
     </div>
 
   </div>
 
   <div id="details" data-role="page" data-title="Hope" class="page-details" data-id="detailsfooter">
+
+    <!-- PANEL DETAILS -->
+    <div data-role="panel" id="panel_details" data-display="overlay" data-theme="a"> 
+      <div id="attrs_details">
+
+      </div>
+
+    </div>
+
+    <!-- CONTENT -->
+
     <div data-role="content" id="detailscontent">
+      <div id="report_details">
+
+      </div>
       <ul id="gallery1" class="gallery">
       
       </ul>
     </div>
     <div id="detailsfooter" data-role="footer" data-position="fixed">
-      <a data-icon="back" data-role="button" class="back ui-btn-left">&nbsp;&nbsp;&nbsp;</a><h1><!-- NEEDS FIX <a id="vote_counter"></a> --><a id="reinforcebtn" style="text-decoration:none;color:#ffffff;">Follow</a></h1>
+      <a data-icon="back" data-role="button" class="back ui-btn-left">&nbsp;&nbsp;&nbsp;</a><h1><!-- NEEDS FIX <a id="vote_counter"></a> --><a id="reinforcebtn" style="text-decoration:none;color:#ffffff;">Follow</a></h1><a href="#panel_details" data-icon="gear" data-role="button" class="ui-btn-right">details</a>
     </div>
 
   </div>
 
 </body>
-
-<script type="text/template" id="login_content">
-</script>
-<script type="text/template" id="home_content">
-</script>
-
-<script type="text/template" id="details_content">
-</script>
-
 
 <script type="text/javascript">
 domain = "http://moth.dec.uc.pt/"

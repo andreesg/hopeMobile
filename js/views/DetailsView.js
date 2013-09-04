@@ -20,7 +20,12 @@ define(["jquery", "backbone", "cordova", "photoswipe", "../collections/PhotoColl
             this.photoList = new PhotoCollection(null, {
                 occurr_id: that.model.id 
             });
-            
+
+            /*console.log("DEBUG!");
+            console.log(that.model);
+            console.log(that.model.get('schema'));
+            */
+
             this.render();
         },
 
@@ -129,7 +134,23 @@ define(["jquery", "backbone", "cordova", "photoswipe", "../collections/PhotoColl
         render: function() {
             this.photoList.on('reset', this.renderPhotos, this);
             this.photoList.fetch();
-            $("#vote_counter").html(""+this.votes);
+
+            $("#report_details").html("<h1>"+this.model.get('title')+"</h1>");
+            if (this.model.get('description') != 'Empty') {
+                $("#report_details").append("<h3>"+this.model.get('description')+"</h3>");
+            }
+
+            var schema = this.model.get('schema');
+            $("#attrs_details").html('');
+
+            console.log("DEBUG CENAS");
+            console.log(this.model.get('schema'));
+            for (var i = 0; i < schema.length; i++) {
+                var template = "<label for='attr_" + schema[i].attribute_id + "' style='color:white;'>" + schema[i].name + "</label><input type='text' name='attr_" + schema[i].attribute_id + "' id='attr_" + schema[i].attribute_id + "' value='" + schema[i].value + "' data-theme='c'>";
+                $("#attrs_details").append(template);
+            }
+
+            $("#attrs_details").trigger('create');
             this.delegateEvents();
             return this;
         }
