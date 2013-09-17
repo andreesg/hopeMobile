@@ -70,7 +70,7 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
                     alert(message)
                 }, 100);
             }, {
-                quality: 35,
+                quality: 25,
                 destinationType: navigator.camera.DestinationType.FILE_URI,
                 sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
                 encodingType: navigator.camera.EncodingType.JPEG,
