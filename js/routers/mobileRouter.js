@@ -2,13 +2,14 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone","cordova", "photoswipe", "../views/LoginView", "../views/ReportView","../views/DetailsView", "../models/CategoryModel", "../collections/CategoryCollection", "../collections/OccurrenceCollection", "async!http://maps.google.com/maps/api/js?sensor=false"], function($, Backbone, Cordova, PhotoSwipe, LoginView, ReportView, DetailsView, CategoryModel, CategoryCollection, OccurrenceCollection, google) {
+define(["jquery", "backbone","cordova", "photoswipe", "../views/LoginView", "../views/ReportView","../views/DetailsView", "../models/CategoryModel", "../collections/CategoryCollection", "../collections/OccurrenceCollection", "async!http://maps.google.com/maps/api/js?sensor=false", "facebook"], function($, Backbone, Cordova, PhotoSwipe, LoginView, ReportView, DetailsView, CategoryModel, CategoryCollection, OccurrenceCollection, google, FB) {
 
     // Extends Backbone.Router
     var CategoryRouter = Backbone.Router.extend({
 
         // The Router constructor
         initialize: function() {
+            // INIT VIEWS
             this.categoryList = new CategoryCollection(null, {
                 scope: 1
             });
@@ -28,11 +29,29 @@ define(["jquery", "backbone","cordova", "photoswipe", "../views/LoginView", "../
             });
 
             this.detailsView = null;
+
+            // SET USER DETAILS
             this.user = null;
             this.token = null;
 
+            // INIT FACEBOOK
+            FB.init({
+                appId:"634764129875517",
+                status: true,
+                xfbml: true
+            });
+
+            console.log("FACEBOOK!");
+            FB.getLoginStatus(function(response) {
+                console.log("TEST Facebook status:");
+                console.log(response);
+            });
+
+            // START BACKBONE
             Backbone.history.start();
-            this.launchAppOrAuth();
+
+            // LAUNCH OR AUTH
+            //this.launchAppOrAuth();
         },
 
         // Backbone.js Routes

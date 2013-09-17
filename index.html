@@ -22,8 +22,6 @@
     border-width: 0px;
   }
 
-
-
   #report_details {
     margin:10px;
   }
@@ -63,10 +61,11 @@
     <div data-role="content" id="logincontent">
       <input type="text" name="username" id="username" value="" placeholder="email@example.com">
       <input type="password" name="password" id="password" value="" autocomplete="off" placeholder="password">
-      <form>
-        <input type="submit" id="submit" value="sign in" data-theme="b">
-        <input type="submit" value="sign up" data-theme="a">
-      </form>
+      <input type="button" id="submit" value="sign in" data-theme="b"/>
+      <input type="button" id="fbloginbtn" value="facebook login" data-theme="a"/>
+      <div id="fb-root">
+
+      </div>
 
     </div>
   </div>

@@ -15,7 +15,8 @@ require.config({
             "async": "libs/async",
             "goog": "libs/goog",
             "photoswipe": "libs/photoswipe",
-            "fastclick": "libs/fastclick"
+            "fastclick": "libs/fastclick",
+            "facebook": "http://connect.facebook.net/en_US/all"
       },
 
       // Sets the configuration for your third party scripts that are not AMD compatible
@@ -24,13 +25,17 @@ require.config({
             "backbone": {
                   "deps": ["underscore", "jquery"],
                   "exports": "Backbone" //attaches "Backbone" to the window object
+            },
+
+            "facebook": {
+                  "exports": "FB"
             }
       } // end Shim Configuration
 
 });
 
 // Includes File Dependencies
-require(["jquery", "backbone", "cordova","fastclick", "routers/mobileRouter"], function($, Backbone, Cordova, FastClick, MobileRouter) {
+require(["jquery", "backbone", "cordova","fastclick", "routers/mobileRouter", "facebook"], function($, Backbone, Cordova, FastClick, MobileRouter, FB) {
 
       $(document).on("mobileinit",
       // Set up the "mobileinit" handler before requiring jQuery Mobile's module
@@ -52,10 +57,7 @@ require(["jquery", "backbone", "cordova","fastclick", "routers/mobileRouter"], f
 
       });
 
-      require(["jquerymobile", "gmap", "fastclick"], function() {
-            /*$(function() {
-                  FastClick.attach(document.body);
-            });*/
+      require(["jquerymobile", "gmap"], function() {
             app = new MobileRouter();
       });
 

@@ -2,12 +2,13 @@
 // =============
 
 // Includes file dependencies
-define(["jquery", "backbone"], function($, Backbone) {
+define(["jquery", "backbone", "facebook"], function($, Backbone, FB) {
 
     // Extends Backbone.View
     var LoginView = Backbone.View.extend({
         events: {
-            'click #submit': 'submitLogin'
+            'click #submit': 'submitLogin',
+            'click #fbloginbtn': 'facebookLogin'
         },
 
         initialize: function() {
@@ -18,7 +19,16 @@ define(["jquery", "backbone"], function($, Backbone) {
             this.render();
         },
 
+        facebookLogin: function(evt) {
+            console.log("[LoginView] Facebook Login!");
+            FB.getLoginStatus(function(response) {
+                console.log("Facebook status:");
+                console.log(response);
+            });
+        },
+
         submitLogin: function(evt) {
+            console.log("[LoginView] Normal Login!");
             var that = this;
             var username = $("#username", this.el).val();
             var password = $("#password", this.el).val();
