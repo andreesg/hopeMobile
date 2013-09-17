@@ -20,11 +20,11 @@ define(["jquery", "backbone", "facebook"], function($, Backbone, FB) {
         },
 
         facebookLogin: function(evt) {
-            console.log("[LoginView] Facebook Login!");
+            /*console.log("[LoginView] Facebook Login!");
             FB.getLoginStatus(function(response) {
                 console.log("Facebook status:");
                 console.log(response);
-            });
+            });*/
         },
 
         submitLogin: function(evt) {

@@ -35,23 +35,23 @@ define(["jquery", "backbone","cordova", "photoswipe", "../views/LoginView", "../
             this.token = null;
 
             // INIT FACEBOOK
-            FB.init({
+            /*FB.init({
                 appId:"634764129875517",
                 status: true,
                 xfbml: true
-            });
+            });*/
 
-            console.log("FACEBOOK!");
+            /*console.log("FACEBOOK!");
             FB.getLoginStatus(function(response) {
                 console.log("TEST Facebook status:");
                 console.log(response);
-            });
+            });*/
 
             // START BACKBONE
             Backbone.history.start();
 
             // LAUNCH OR AUTH
-            //this.launchAppOrAuth();
+            this.launchAppOrAuth();
         },
 
         // Backbone.js Routes
