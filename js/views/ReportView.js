@@ -17,6 +17,8 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             'click #logoutbtn': 'logout'
         },
 
+        categoriesList: null,
+
         initialize: function() {
             console.log("[ReportView] Init.");
             this.arrayMarkers = [];
@@ -36,8 +38,20 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             console.log(evt);
         },
 
-        categoryChanged: function() {
+        categoryChanged: function(evt) {
             console.log("[ReportView] Category Changed.");
+            var id = $("#categorieslist").val();
+            var model = this.categoriesList.get({"id":id});
+
+            var fields = model.get('fields');
+            var template = "";
+            for (var i = 0; i < fields.length; i++) {
+                template = "<input type='text' name='attr_" + fields[i].id + "' id='attr_" + fields[i].id + "' data-theme='c' placeholder='"+fields[i].name+"'>";
+                $("#category-fields").append(template);
+            };
+            $("#category-fields").trigger('create');
+            $("#category-fields").show();
+
             $("#titleinput").show();
         },
 
@@ -96,6 +110,14 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
             var latlng = ""+lat+", "+lng+"";
             var cat_id = $("#categorieslist :selected").attr("id");
             var title = $("#report_title").val();
+            var attributes = [];
+
+            $("#category-fields :input").each(function() {
+                attributes.push({"id": $(this).attr("id").split("_")[1], "value": $(this).val()});
+            });
+
+            console.log("DEBUGGGGG");
+            console.log(attributes);
 
             var new_occurr = new OcurrenceModel({
                 geo: {
@@ -109,6 +131,7 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
                 category_id: cat_id,
                 title: title,
                 coords: latlng,
+                attributes: attributes,
                 user: that.user,
                 token: that.token
             });
@@ -119,7 +142,7 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
                     //alert("Saved Successfully.");
                     $("#report_title").val('');
                     $("#titleinput").hide();
-
+                    $("#category-fields").hide();
                     result = response.result;
                     occurr_id = result['id'];
 
@@ -209,9 +232,15 @@ define(["jquery", "backbone", "cordova", "../collections/CategoryCollection", ".
 
         renderCategories: function(collection, response) {
             console.log("[ReportView] Render categories.");
+            $("#categorieslist").html("<option>Select a category:</option>");
             var template = "";
+            
+            this.categoriesList = collection;
+            console.log("TEST!");
+            console.log(this.categoriesList);
+
             collection.each(function(model) {
-                template += "<option value='"+model.get("name")+"' id='"+model.get("id")+"'>"+model.get("name")+"</option>";
+                template += "<option value='"+model.get("id")+"' id='"+model.get("id")+"'>"+model.get("name")+"</option>";
             });
             $("#categorieslist").append(template);
             $("#categorieslist").show();
